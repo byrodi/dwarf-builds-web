@@ -2,8 +2,8 @@
 
 Browse and share Deep Rock Galactic builds as codes for the Dwarf Builds mod.
 
-Live at [dwarfbuilds.pages.dev](https://dwarfbuilds.pages.dev). The mod, the game data exporter and the design
-documents are in [byrodi/dwarf-builds-drg](https://github.com/byrodi/dwarf-builds-drg).
+Live at [dwarfbuilds.pages.dev](https://dwarfbuilds.pages.dev). The mod and the game data exporter are in
+[byrodi/dwarf-builds-drg](https://github.com/byrodi/dwarf-builds-drg).
 
 ## Features
 
@@ -16,9 +16,7 @@ documents are in [byrodi/dwarf-builds-drg](https://github.com/byrodi/dwarf-build
 ## How it is built
 
 Cloudflare Pages: static files in `public/` and Pages Functions in `functions/`, with the D1 database
-`dwarfbuilds-db`. No framework and no build step. The design is in
-[Docs/dwarfbuilds-site.md](https://github.com/byrodi/dwarf-builds-drg/blob/main/Docs/dwarfbuilds-site.md) of the mod
-repository.
+`dwarfbuilds-db`. No framework and no build step.
 
 Game data (`public/data/` and `public/img/`) is not in git. `Tools/dwarfbuilds_export.py` in the mod repository
 reads it from an installed game and writes it here; in the mod repository this site is the `Web` submodule.
