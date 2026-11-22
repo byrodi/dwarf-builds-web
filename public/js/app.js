@@ -1,5 +1,6 @@
 // Entry: loads game data and the session, draws the top bar and routes pages on the client.
 // Routes: /  /b/<id>  /new  /edit/<id>  /u/<steamid>  /me  (anything else: 404 view).
+// MY BUILDS is your own /u/<steamid> (the link others get); /me sends you there, or asks you to sign in.
 
 import { h, mount } from "./dom.js";
 import { api, loginUrl } from "./api.js";
@@ -44,6 +45,8 @@ async function loadMe() {
 function drawAccount() {
   const box = document.getElementById("account");
   const me = session.me;
+  const mine = document.querySelector('[data-nav="me"]');
+  if (mine) mine.setAttribute("href", me ? `/u/${me.steamId}` : "/me");
   if (me === undefined) return mount(box);
   if (!me) {
     const b = button("SIGN IN", {
@@ -54,9 +57,8 @@ function drawAccount() {
     return mount(box, b);
   }
   const menu = h("div.menu", { hidden: true, role: "menu" },
-    h("a", { href: "/me", "data-link": "", text: "MY BUILDS" }),
+    h("a", { href: `/u/${me.steamId}`, "data-link": "", text: "MY BUILDS" }),
     h("a", { href: "/new", "data-link": "", text: "NEW BUILD" }),
-    h("a", { href: `/u/${me.steamId}`, "data-link": "", text: "PUBLIC PROFILE" }),
     h("button", { type: "button", text: "SIGN OUT", onclick: signOut }));
   const btn = h("button.user-btn", {
     type: "button", "aria-haspopup": "true",
@@ -92,6 +94,13 @@ export function setGuard(fn) {
 
 function setNav(name) {
   for (const a of document.querySelectorAll("[data-nav]")) a.classList.toggle("on", a.dataset.nav === name);
+}
+
+// The top bar tab of a route: your own /u/<steamid> is MY BUILDS.
+function navOf(hit, params) {
+  if (!hit) return "";
+  if (hit.page === userPage && session.me && params[0] === session.me.steamId) return "me";
+  return hit.nav;
 }
 
 // ---------------------------------------------------------------- notices
@@ -158,7 +167,7 @@ async function route() {
       break;
     }
   }
-  setNav(hit ? hit.nav : "");
+  setNav(navOf(hit, params));
   drawAccount();
   mount(app, loadingState());
   try {
@@ -170,8 +179,11 @@ async function route() {
     return;
   }
   if (!isCurrent(token)) return;
-  if (session.me === undefined) await loadMe();
-  if (!isCurrent(token)) return;
+  if (session.me === undefined) {
+    await loadMe();
+    if (!isCurrent(token)) return;
+    setNav(navOf(hit, params));
+  }
   const ctx = {
     app, params, query, me: session.me || null, token,
     alive: () => isCurrent(token),

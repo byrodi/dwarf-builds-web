@@ -1,4 +1,4 @@
-// "/u/<steamid>" a user's builds; "/me" your own builds (or a sign-in prompt).
+// "/u/<steamid>" a user's builds (your own: MY BUILDS); "/me" sends you there (or asks you to sign in).
 
 import { h, mount, formatDate } from "../dom.js";
 import { api, errorText, loginUrl } from "../api.js";
@@ -14,12 +14,13 @@ export async function mePage(ctx) {
       [button("SIGN IN WITH STEAM", { href: loginUrl("/me"), link: false }), button("BROWSE", { kind: "sec", href: "/" })]));
     return;
   }
-  return userPage(ctx, ctx.me.steamId, true);
+  // Your builds live at your own /u/<steamid>: the same address others open.
+  await ctx.navigate(`/u/${ctx.me.steamId}`, { replace: true });
 }
 
-export async function userPage(ctx, steamIdArg, self = false) {
+export async function userPage(ctx, steamIdArg) {
   const steamId = steamIdArg || ctx.params[0];
-  const mine = self || (ctx.me && ctx.me.steamId === steamId);
+  const mine = !!ctx.me && ctx.me.steamId === steamId;
   const page = Math.max(1, parseInt(ctx.query.get("page") || "1", 10) || 1);
   mount(ctx.app, loadingState());
   let data;
@@ -27,14 +28,14 @@ export async function userPage(ctx, steamIdArg, self = false) {
     data = await api.get(`/api/users/${encodeURIComponent(steamId)}?page=${page}`);
   } catch (e) {
     if (!ctx.alive()) return;
-    if (e.status === 404 && self) {
+    if (e.status === 404 && mine) {
       // Signed in but nothing stored yet: show the empty list.
       data = { user: { steamId, name: ctx.me.name, avatar: ctx.me.avatar, createdAt: 0 }, builds: [], page: 1, hasMore: false };
     } else if (e.status === 404) {
       mount(ctx.app, errorState("DWARF NOT FOUND", "No one with this Steam ID has shared a build here.", [button("BROWSE BUILDS", { href: "/" })]));
       return;
     } else {
-      mount(ctx.app, errorState("COULD NOT LOAD BUILDS", errorText(e), [button("RETRY", { onclick: () => userPage(ctx, steamIdArg, self) })]));
+      mount(ctx.app, errorState("COULD NOT LOAD BUILDS", errorText(e), [button("RETRY", { onclick: () => userPage(ctx, steamIdArg) })]));
       return;
     }
   }
