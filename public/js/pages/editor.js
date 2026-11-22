@@ -327,7 +327,8 @@ function editor(ctx, editId, start, startNotes) {
     titleCount.classList.toggle("over", tl > TITLE_MAX);
     descCount.textContent = `${dl} / ${DESC_MAX}`;
     descCount.classList.toggle("over", dl > DESC_MAX);
-    if (publishBtn) publishBtn.disabled = st.busy || !(v.ok && v.canonical) || !tl || tl > TITLE_MAX || dl > DESC_MAX;
+    // Disabled only while saving: a press on an unfinished build says what is missing, at the field it is about.
+    if (publishBtn) publishBtn.disabled = st.busy;
   }
 
   function actionBox() {
@@ -384,6 +385,14 @@ function editor(ctx, editId, start, startNotes) {
     }
     if (!title) {
       refuse("Give your build a title.", "title");
+      return;
+    }
+    if (textLength(title) > TITLE_MAX) {
+      refuse(`The title is longer than ${TITLE_MAX} characters.`, "title");
+      return;
+    }
+    if (textLength(st.description.trim()) > DESC_MAX) {
+      refuse(`The description is longer than ${DESC_MAX} characters.`, "description");
       return;
     }
     st.busy = true;
