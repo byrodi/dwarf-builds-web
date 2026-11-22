@@ -307,7 +307,7 @@ export function buildFromJson(buildJson, gameData) {
   return { code: v.canonical, build: v.build, missing: missing.concat(v.ok ? [] : v.errors) };
 }
 
-// Short label for a code, e.g. for the clipboard banner: { className, primary }.
+// Short label for a code: { className, primary }.
 export function describeCode(code, gameData) {
   const b = typeof code === "string" ? parseCode(code) : code;
   if (!b) return null;

@@ -286,7 +286,7 @@ export async function browsePage(ctx) {
   mount(ctx.app,
     h("div.page-head",
       h("div", h("h1.page-title", { text: "Browse builds" }),
-        h("div.page-sub", { text: "Copy a code, press B in game" })),
+        h("div.page-sub", { text: "Copy a code, paste it in game" })),
       button("NEW BUILD", { href: "/new" })),
     tabs,
     h("div.filters", weaponPick.wrap, ocPick.wrap, h("div.sortbox", SORTS.map((s) => sortBtns[s]), periodPick), search),

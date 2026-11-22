@@ -1,5 +1,5 @@
 // Entry: loads game data and the session, draws the top bar and routes pages on the client.
-// Routes: /  /b/<id>  /new  /edit/<id>  /u/<steamid>  /me  (anything else: 404 view).
+// Routes: /  /b/<id>  /new  /edit/<id>  /u/<steamid>  /me  /reports (admins)  (anything else: 404 view).
 // MY BUILDS is your own /u/<steamid> (the link others get); /me sends you there, or asks you to sign in.
 
 import { h, mount } from "./dom.js";
@@ -11,6 +11,7 @@ import { buildPage } from "./pages/build.js";
 import { editorPage } from "./pages/editor.js";
 import { userPage, mePage } from "./pages/user.js";
 import { notFoundPage } from "./pages/notfound.js";
+import { reportsPage } from "./pages/reports.js";
 
 const app = document.getElementById("app");
 const session = { me: undefined };
@@ -25,6 +26,7 @@ const ROUTES = [
   { re: /^\/edit\/([0-9A-Za-z]{1,32})\/?$/, page: editorPage, nav: "" },
   { re: /^\/u\/([0-9]{1,20})\/?$/, page: userPage, nav: "" },
   { re: /^\/me\/?$/, page: mePage, nav: "me" },
+  { re: /^\/reports\/?$/, page: reportsPage, nav: "" },
 ];
 
 // ---------------------------------------------------------------- session and top bar
@@ -59,6 +61,7 @@ function drawAccount() {
   const menu = h("div.menu", { hidden: true, role: "menu" },
     h("a", { href: `/u/${me.steamId}`, "data-link": "", text: "MY BUILDS" }),
     h("a", { href: "/new", "data-link": "", text: "NEW BUILD" }),
+    me.admin ? h("a", { href: "/reports", "data-link": "", text: "REPORTS" }) : null,
     h("button", { type: "button", text: "SIGN OUT", onclick: signOut }));
   const btn = h("button.user-btn", {
     type: "button", "aria-haspopup": "true",

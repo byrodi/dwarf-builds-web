@@ -54,6 +54,8 @@ POST/PUT/DELETE need `Content-Type: application/json`, `X-Dwarfbuilds: 1` and a 
 | POST | `/api/builds/:id/like` | `{liked, likes}` (toggle; not on your own build) |
 | POST | `/api/builds/:id/report` `{reason}` | `{ok}` |
 | POST | `/api/builds/:id/hide` `{hidden}` (admin) | `{id, hidden}` |
+| GET | `/api/admin/reports?page=` (admin) | `{builds: [card + {reportCount, lastReport, reports: [{reason, createdAt, user}]}], page, pageSize: 20, hasMore}` |
+| DELETE | `/api/admin/reports/:buildId` (admin) | `{ok, removed}`: dismisses the build's reports |
 | GET | `/api/users/:steamid?page=` | `{user: {steamId, name, avatar, createdAt}, builds: [card], page, pageSize, hasMore}` |
 
 Sorting: `hot` (the default) is `log10(likes + 1) + age / 7 days`, stored in `builds.hot`, so new builds can pass

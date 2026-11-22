@@ -147,8 +147,9 @@ function draw(ctx, b) {
       h("div.howto",
         h("div.notes-sub", { text: "Use it in game" }),
         h("ol",
-          h("li", h("b", { text: "COPY CODE" }), ", then in game press ", h("span.kbd", { text: "B" }), ": the code is picked up from your clipboard."),
-          h("li", "Or open the ", h("b", { text: "BUILD CODE" }), " tab, press ", h("b", { text: "PASTE" }), ", then ", h("b", { text: "TAKE BUILD" }), ".")),
+          h("li", h("b", { text: "COPY CODE" }), "."),
+          h("li", "In game press ", h("span.kbd", { text: "B" }), " and open the ", h("b", { text: "BUILD CODE" }), " tab."),
+          h("li", "Press ", h("b", { text: "PASTE FROM CLIPBOARD" }), ", then ", h("b", { text: "TAKE BUILD" }), ".")),
         h("div.label", { text: "Needs the Dwarf Builds mod" }))));
   const action = h("div.ls-actions", copyButton(() => b.code, {}));
 
