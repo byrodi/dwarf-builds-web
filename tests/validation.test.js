@@ -91,6 +91,8 @@ test("build body", () => {
   assert.throws(() => parseBuildBody({ title: "", code: CODE }, game), /title is required/);
   assert.throws(() => parseBuildBody({ title: "t", code: "nope" }, game), /invalid build/);
   assert.throws(() => parseBuildBody({ title: "t" }, game), /code is required/);
+  assert.throws(() => parseBuildBody({ title: "fuck you", code: CODE }, game), /title has a word that is not allowed: "fuck"/);
+  assert.throws(() => parseBuildBody({ title: "t", code: CODE, description: "ok\nполный пиздец" }, game), /description has a word/);
   assert.throws(() => parseBuildBody({ title: "t", code: CODE, description: "x".repeat(4001) }, game), /4000/);
   assert.throws(() => parseBuildBody({ title: "t", code: CODE.replace(/:[^:]*$/, ":1.4.8") }, game), /too many active/);
 });

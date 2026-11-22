@@ -2,6 +2,7 @@
 
 import { validateBuild, buildFromJson } from "../../public/js/shared/code.js";
 import { HttpError, cleanText } from "./http.js";
+import { findProfanity } from "./profanity.js";
 
 export const PAGE_SIZE = 24;
 // OFFSET paging reads every skipped row: deep pages cost D1 reads (free plan), so stop at 50.
@@ -63,10 +64,18 @@ export const CARD_COLUMNS = `b.id, b.user_id, b.class, b.title, b.code, b.primar
   b.primary_oc, b.secondary_oc, b.likes, b.hidden, b.created_at, b.updated_at,
   u.name AS author_name, u.avatar AS author_avatar`;
 
+// Public text: cleanText, and no profanity.
+function publicText(value, options) {
+  const s = cleanText(value, options);
+  const bad = findProfanity(s);
+  if (bad) throw new HttpError(400, `${options.name} has a word that is not allowed: "${bad}"`);
+  return s;
+}
+
 // Checks {title, description, code}. Returns the values to store.
 export function parseBuildBody(body, gameData) {
-  const title = cleanText(body.title, { max: TITLE_MAX, required: true, name: "title" });
-  const description = cleanText(body.description, { max: DESCRIPTION_MAX, multiline: true, name: "description" });
+  const title = publicText(body.title, { max: TITLE_MAX, required: true, name: "title" });
+  const description = publicText(body.description, { max: DESCRIPTION_MAX, multiline: true, name: "description" });
   if (typeof body.code !== "string" || !body.code.trim()) throw new HttpError(400, "code is required");
   const v = validateBuild(body.code, gameData);
   if (!v.ok) throw new HttpError(400, `invalid build: ${v.errors.slice(0, 5).join("; ")}`);

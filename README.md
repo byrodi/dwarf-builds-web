@@ -29,7 +29,7 @@ reads it from an installed game and writes it here; in the mod repository this s
 | `public/js/shared/code.js` | DB2 build code: parse, encode, validate against game.json, rebuild from asset names. Used by the browser and the Functions. |
 | `functions/api/` | JSON API (`_middleware.js`: CSRF guard, errors, security headers, session). |
 | `functions/b/[id].js` | `/b/<id>`: index.html with Open Graph tags (replaces `<!--og-->`). |
-| `functions/_lib/` | Helpers: session cookie, Steam OpenID, Steam profile, game data, builds. |
+| `functions/_lib/` | Helpers: session cookie, Steam OpenID, Steam profile, game data, builds, profanity check. |
 | `migrations/` | D1 schema. |
 | `scripts/check-secrets.mjs` | Secret scan of `public/` and `functions/`. |
 | `scripts/make-vectors.mjs` | Writes `tests/code_vectors.json` from the test fixture. |
@@ -59,6 +59,9 @@ POST/PUT/DELETE need `Content-Type: application/json`, `X-Dwarfbuilds: 1` and a 
 card = `{id, class, title, code, primaryItem, secondaryItem, primaryOc, secondaryOc, likes, hidden, createdAt, updatedAt, author: {steamId, name, avatar}}`.
 Item and OC values are game.json ids (`FlameThrower`, `OC_Flamethrower_ClipSize_B`). Titles and descriptions are
 plain text: show them with `textContent`, never `innerHTML`.
+
+Titles and descriptions with profanity (English or Russian) are refused with 400: `functions/_lib/profanity.js`,
+the [obscenity](https://github.com/jo3-l/obscenity) package plus a short list of Russian roots.
 
 ## Local dev
 
