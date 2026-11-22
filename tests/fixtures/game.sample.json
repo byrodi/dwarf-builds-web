@@ -1,0 +1,3387 @@
+{
+ "version": "2026-11-22 fixture 0",
+ "slots": [
+  "primary",
+  "secondary",
+  "traversal",
+  "tool",
+  "armor",
+  "grenade",
+  "pickaxe"
+ ],
+ "slotNames": {
+  "primary": "Primary Weapon",
+  "secondary": "Secondary Weapon",
+  "traversal": "Traversal Tool",
+  "tool": "Support Tool",
+  "armor": "Armor",
+  "grenade": "Throwable",
+  "pickaxe": "Pickaxe"
+ },
+ "classes": [
+  {
+   "letter": "D",
+   "key": "driller",
+   "name": "Driller",
+   "icon": "img/class/driller.png",
+   "portrait": "img/class/driller_portrait.png",
+   "slots": {
+    "primary": [
+     {
+      "index": 1,
+      "id": "FlameThrower",
+      "name": "CRSPR Flamethrower",
+      "category": "Heavy Weapon",
+      "description": "When bullets or blunt force just don't cut it, a sea of r...",
+      "icon": "img/items/FlameThrower.png",
+      "iconLine": "img/items/FlameThrower_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Flamethrower_A_ClipSize",
+          "name": "High Capacity Tanks",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_FlameThrower_A_RangeIncrease",
+          "name": "High-Pressure Ejector",
+          "description": "Increases the range of the flame for long distance incine...",
+          "category": "Reach",
+          "icon": "img/upg/Reach.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Flamethrower_B_Damage",
+          "name": "Unfiltered Fuel",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Flamethrower_B_Heat",
+          "name": "Triple Filtered Fuel",
+          "description": "Fire it up! You set things ablaze much faster. Time to wa...",
+          "category": "Heat",
+          "icon": "img/upg/Heat.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Flamethrower_B_StickyDuration",
+          "name": "Sticky Flame Duration",
+          "description": "Sticky flames duration increase",
+          "category": "Duration",
+          "icon": "img/upg/Duration_V2.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Flamethrower_C_RoF",
+          "name": "Oversized Valves",
+          "description": "Increased fuel consumption rate for more damage",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Flamethrower_C_StickySlowdown",
+          "name": "Sticky Flame Slowdown",
+          "description": "Creatures moving through sticky flames are slowed",
+          "category": "Slowdown",
+          "icon": "img/upg/Slowdown.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Flamethrower_C_Ammo_1",
+          "name": "More Fuel",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Flamethrower_D_Fear",
+          "name": "It Burns!",
+          "description": "A chance that your target will flee in terror for every s...",
+          "category": "Fear",
+          "icon": "img/upg/Fear.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Flamethrower_D_StickyDuration_2",
+          "name": "Sticky Flame Duration",
+          "description": "Sticky flames duration increase",
+          "category": "Duration",
+          "icon": "img/upg/Duration_V2.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Flamethrower_D_Ammo_2",
+          "name": "More Fuel",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_FlameThrower_E_HeatAoE",
+          "name": "Heat Radiance",
+          "description": "Burn everything around you",
+          "category": "Heat",
+          "icon": "img/upg/Heat.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Flamethrower_E_TargetExplode",
+          "name": "Targets Explode",
+          "description": "Targets killed from direct damage have a chance to explode",
+          "category": "Explosion",
+          "icon": "img/upg/Explosion.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_Flamethrower_ClipSize_B",
+        "name": "Compact Feed Valves",
+        "type": "balanced",
+        "description": "The smaller mechanism allows for greater tank capacity an...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "Increased tank capacity",
+          "good": true
+         },
+         {
+          "text": "More ammo",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_Flamethrower_DMG_U",
+        "name": "Face Melter",
+        "type": "unstable",
+        "description": "This crazy bit of tweaking will give a big boost in damag...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Greater damage",
+          "good": true
+         },
+         {
+          "text": "Increased flow rate",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_Flamethrower_MaxAmmo_C",
+        "name": "Lighter Tanks",
+        "type": "clean",
+        "description": "Lighter weight gear means more fuel and sandwiches.",
+        "icon": "img/upg/Total_Ammo.png",
+        "stats": [
+         {
+          "text": "More ammo",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_Flamethrower_Range_B",
+        "name": "Fuel Stream Diffuser",
+        "type": "balanced",
+        "description": "Increases operational range but decreases the fuel flow r...",
+        "icon": "img/upg/Reach.png",
+        "stats": [
+         {
+          "text": "Extended operational range",
+          "good": true
+         },
+         {
+          "text": "Slower rate of fire",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_Flamethrower_StickyDuration_U",
+        "name": "Sticky Fuel",
+        "type": "unstable",
+        "description": "Special fuel mixture extends the duration and damage of S...",
+        "icon": "img/upg/Duration_V2.png",
+        "stats": [
+         {
+          "text": "Greatly extended sticky flame duration",
+          "good": true
+         },
+         {
+          "text": "Increased damage from sticky flames",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_Flamethrower_StickyFlameDuration_C",
+        "name": "Sticky Additive",
+        "type": "clean",
+        "description": "Special additive compound extends the Sticky Flame durati...",
+        "icon": "img/upg/Duration_V2.png",
+        "stats": [
+         {
+          "text": "Longer sticky flame duration",
+          "good": true
+         },
+         {
+          "text": "Small damage boost",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_Flamethrower_Hellfire_U",
+        "name": "Scorching Tide",
+        "type": "unstable",
+        "description": "A supercharged injection system and integrated duckbill c...",
+        "icon": "img/upg/Icon_Overclock_Special_Magazine.png",
+        "stats": [
+         {
+          "text": "Holding reload charges up and fires a horizontal spread of intensely hot projectiles",
+          "good": true
+         },
+         {
+          "text": "Charged shot consumes a lot of ammo",
+          "good": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "index": 2,
+      "id": "Cryospray",
+      "name": "Cryo Cannon",
+      "category": "Heavy Weapon",
+      "description": "Mad geniuses have tried perfecting this implement for as ...",
+      "icon": "img/items/Cryospray.png",
+      "iconLine": "img/items/Cryospray_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Cryospray_A_PressureDropSpeed",
+          "name": "Larger Pressure Chamber",
+          "description": "Lets you shoot for a longer time before needing to refill...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Cryospray_A_ChargeTime",
+          "name": "Faster Turbine Spinup",
+          "description": "Start freezing things as soon as you pull the trigger wit...",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Cryospray_A_Cooling_New",
+          "name": "Stronger Cooling Unit",
+          "description": "Freeze things at a faster rate.",
+          "category": "Cold",
+          "icon": "img/upg/Cold.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Cryospray_B_Ammo",
+          "name": "Larger Reserve Tank",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Cryospray_B_Reach",
+          "name": "Overclocked Ejection Turbine",
+          "description": "Increases the effective range of the weapon.",
+          "category": "Reach",
+          "icon": "img/upg/Reach.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Cryospray_B_RePressureTime",
+          "name": "Bypassed Integrity Check",
+          "description": "If you completely empty the pressure chamber, the weapon ...",
+          "category": "Overheat",
+          "icon": "img/upg/Duration.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Cryospray_C_PressureRegain",
+          "name": "Improved Pump",
+          "description": "Refill the pressure chamber faster.",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Cryospray_C_RoF",
+          "name": "Increased Flow Volume",
+          "description": "We overclocked your gun. It fires faster. Don't ask. Just...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Cryospray_D_Damage_New",
+          "name": "Hard Mixture",
+          "description": "Promotes ice-crystal formation in the stream resulting in...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Cryospray_D_Cooling_New",
+          "name": "Supercooling Mixture",
+          "description": "Improves the heat capacity of the stream so you can freez...",
+          "category": "Cold",
+          "icon": "img/upg/Cold.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Cryospray_D_Ammo2",
+          "name": "Larger Reserve Tank",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Cryospray_E_ShatterEnemies",
+          "name": "Fragile",
+          "description": "There is a chance that frozen targets will spontaneously ...",
+          "category": "Special",
+          "icon": "img/upg/Explosion.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Cryospray_E_AoECold",
+          "name": "Cold Radiance",
+          "description": "Any enemy that strays close to you while firing the Cryo ...",
+          "category": "Cold",
+          "icon": "img/upg/Cold.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_Cryospray_Ammo+PressureDrop_C",
+        "name": "Improved Thermal Efficiency",
+        "type": "clean",
+        "description": "Get all you can from your fuel and lose pressure slower f...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "More ammo",
+          "good": true
+         },
+         {
+          "text": "Shoot longer before needing to repressurize",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_Cryospray_Cooling+Rof_B",
+        "name": "Tuned Cooler",
+        "type": "balanced",
+        "description": "Freeze things faster at the cost of a slower pump and tur...",
+        "icon": "img/upg/Cold.png",
+        "stats": [
+         {
+          "text": "Extra freezing power",
+          "good": true
+         },
+         {
+          "text": "Increased flow rate",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_Cryospray_FastFlow_B",
+        "name": "Flow Rate Expansion",
+        "type": "balanced",
+        "description": "A low volume high pressure chamber paired with a high pow...",
+        "icon": "img/upg/Duration.png",
+        "stats": [
+         {
+          "text": "Increased flow rate",
+          "good": true
+         },
+         {
+          "text": "Very fast chamber pressurization",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_Cryospray_IceStorm_U",
+        "name": "Ice Storm",
+        "type": "unstable",
+        "description": "A change in the fuel mixture along with some heavy cooler...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Massive damage boost with an extra bonus against frozen targets",
+          "good": true
+         },
+         {
+          "text": "Less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_Cryospray_Icicle_U",
+        "name": "Ice Spear",
+        "type": "balanced",
+        "description": "Pressing the reload button dumps all the fluid in the cha...",
+        "icon": "img/upg/ProjectileSpeed.png",
+        "stats": [
+         {
+          "text": "Shoot giant ice projectiles that deal massive damage and stun most targets",
+          "good": true
+         },
+         {
+          "text": "Extended repressure delay",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_Cryospray_Snowball_U",
+        "name": "Snowball",
+        "type": "unstable",
+        "description": "Pressing the reload button shoots all the cryofuel in the...",
+        "icon": "img/upg/Area.png",
+        "stats": [
+         {
+          "text": "Shoot ranged AoE cryo-projectiles that flash-cool everything around the impact zone",
+          "good": true
+         },
+         {
+          "text": "The warming rate of affected targets is reduced for a short time",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_StickyCrystals_U",
+        "name": "Crystal Nucleation",
+        "type": "balanced",
+        "description": "A new cryoctane fuel blend creates razor-sharp formations...",
+        "icon": "img/upg/Special.png",
+        "stats": [
+         {
+          "text": "Creates slowing and damaging sticky frost on terrain impact",
+          "good": true
+         },
+         {
+          "text": "Affected by cooling and damage mods",
+          "good": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "secondary": [
+     {
+      "index": 1,
+      "id": "Pistol",
+      "name": "Subata 120",
+      "category": "Pistol",
+      "description": "A small, light semi-automatic for small, light dwarves. M...",
+      "icon": "img/items/Pistol.png",
+      "iconLine": "img/items/Pistol_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pistol_A_BaseAccuracy",
+          "name": "Improved Alignment",
+          "description": "Expertly adjusted for pin-point accuracy on the first sho...",
+          "category": "Accuracy",
+          "icon": "img/upg/Accuracy.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pistol_A_ClipSize",
+          "name": "High Capacity Magazine",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pistol_B_Ammo+80",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pistol_B_Damage",
+          "name": "Improved Propellant",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pistol_C_RecoilCompensator",
+          "name": "Recoil Compensator",
+          "description": "This little tweak reduces weapon recoil and spread per sh...",
+          "category": "Accuracy",
+          "icon": "img/upg/Accuracy.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pistol_C_BurstCombo",
+          "name": "2-Round Burst",
+          "description": "A custom firing mechanism lets you fire two shots so fast...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Pistol_C_ReloadSpeed",
+          "name": "Quickfire Ejector",
+          "description": "Experience, training, and a couple of under-the-table des...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pistol_D_WeakspotDamage",
+          "name": "Hollow-Point Bullets",
+          "description": "Hit 'em where it hurts! Literally! We've upped the damage...",
+          "category": "Weak Spot Bonus",
+          "icon": "img/upg/WeakspotBonus.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pistol_D_Damage2",
+          "name": "High Velocity Rounds",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Pistol_D_Ammo2",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pistol_E_DamageVsBurning",
+          "name": "Volatile Bullets",
+          "description": "Bonus fire damage to burning targets.",
+          "category": "Heat",
+          "icon": "img/upg/Heat.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pistol_E_Blowthrough",
+          "name": "Blowthrough Rounds",
+          "description": "Shaped projectiles designed to over-penetrate targets wit...",
+          "category": "Blowthrough",
+          "icon": "img/upg/Blow_Through.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Pistol_E_CorrosiveCatalyst",
+          "name": "Neuro-Corrosive Toxic Catalyst",
+          "description": "Causes a target affected by neurotoxins or corrosive slud...",
+          "category": "Special",
+          "icon": "img/upg/Special.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_Pistol_ChainHit_C",
+        "name": "Chain Hit",
+        "type": "clean",
+        "description": "Any shot that hits a weakspot has a chance to ricochet in...",
+        "icon": "img/upg/Ricoshet.png",
+        "stats": [
+         {
+          "text": "Weakspot hits ricochet into a nearby enemy",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_Pistol_ClipSize_B",
+        "name": "Oversized Magazine",
+        "type": "balanced",
+        "description": "Custom magazine that can fit a lot more ammo but it's a b...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "Significant increase in magazine capacity",
+          "good": true
+         },
+         {
+          "text": "Longer reload time",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_Pistol_ExplosiveReload_U",
+        "name": "Explosive Reload",
+        "type": "unstable",
+        "description": "Micro-explosives that explode inside hit targets when you...",
+        "icon": "img/upg/Icon_Overclock_Special_Magazine.png",
+        "stats": [
+         {
+          "text": "Micro-explosives trigger inside targets on reload causing massive damage",
+          "good": true
+         },
+         {
+          "text": "Significantly less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_Pistol_FullAuto_U",
+        "name": "Automatic Fire",
+        "type": "unstable",
+        "description": "Fully automatic action, watch out for the recoil.",
+        "icon": "img/upg/RateOfFire.png",
+        "stats": [
+         {
+          "text": "Full auto",
+          "good": true
+         },
+         {
+          "text": "Significantly faster rate of fire",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_Pistol_RandomDamageNew_C",
+        "name": "Homebrew Powder",
+        "type": "clean",
+        "description": "More damage on average but it's a bit inconsistent.",
+        "icon": "img/upg/Icon_Overclock_ChangeOfHigherDamage.png",
+        "stats": [
+         {
+          "text": "80% to 140% damage output per shot",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_Pistol_TranqDarts_U",
+        "name": "Tranquilizer Rounds",
+        "type": "unstable",
+        "description": "Part bullet, part syringe, these rounds are very effectiv...",
+        "icon": "img/upg/Stun.png",
+        "stats": [
+         {
+          "text": "Stun and slow most targets for an extended period of time",
+          "good": true
+         },
+         {
+          "text": "Slower rate of fire",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_Pistol_ConductorBullets_B",
+        "name": "Elemental Primer",
+        "type": "balanced",
+        "description": "Specialized bullets embed electro-thermal conductors and ...",
+        "icon": "img/upg/Special.png",
+        "stats": [
+         {
+          "text": "Applies temporary buff to all elemental damage on hit",
+          "good": true
+         },
+         {
+          "text": "Applies temporary burn and freeze threshold debuff on hit",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 8,
+        "id": "OC_Pistol_NeurotoxinMinelets_U",
+        "name": "Neurotoxin Minelets",
+        "type": "unstable",
+        "description": "After impacting terrain, these bullets convert into proxi...",
+        "icon": "img/upg/Player_State_Poison.png",
+        "stats": [
+         {
+          "text": "Neurotoxin Minelets",
+          "good": true
+         },
+         {
+          "text": "Small decrease in damage",
+          "good": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "index": 2,
+      "id": "ChargeBlaster",
+      "name": "Experimental Plasma Charger",
+      "category": "Pistol",
+      "description": "Bullets are so last year. Why not incinerate your enemies...",
+      "icon": "img/items/ChargeBlaster.png",
+      "iconLine": "img/items/ChargeBlaster_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_ChargeBlaster_A_Damage",
+          "name": "Increased Particle Density",
+          "description": "Improves the damage caused by the normal shots.",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_ChargeBlaster_A_Ammo",
+          "name": "Larger Battery",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_ChargeBlaster_A_ChargeDirectDMG",
+          "name": "Higher Charged Plasma Energy",
+          "description": "More bang for the buck! Increases both the direct and are...",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_ChargeBlaster_D_HeatBuildup",
+          "name": "Heat Shield",
+          "description": "Reduces how fast the weapon overheats when holding a char...",
+          "category": "Cooling",
+          "icon": "img/upg/Cooling.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_ChargeBlaster_B_NormalVelocity",
+          "name": "Overcharged Plasma Accelerator",
+          "description": "You need to be a physicist to understand how it works but...",
+          "category": "Projectile Speed",
+          "icon": "img/upg/ProjectileSpeed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_ChargeBlaster_C_ChargeCost",
+          "name": "Improved Charge Efficiency",
+          "description": "Each charged shot uses less energy.",
+          "category": "Energy Consumption",
+          "icon": "img/upg/Fuel.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_ChargeBlaster_C_ChargeSpeed",
+          "name": "Crystal Capacitors",
+          "description": "Prepare a charged shot much faster.",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_ChargeBlaster_D_CoolingRate",
+          "name": "Tweaked Radiator",
+          "description": "Increases the rate at which the weapon sheds heat, lettin...",
+          "category": "Cooling",
+          "icon": "img/upg/Cooling.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_ChargeBlaster_B_ChargedExplosionRadius",
+          "name": "Expanded Plasma Splash",
+          "description": "Greater damage radius for the charged projectile explosion.",
+          "category": "Area of Effect",
+          "icon": "img/upg/Area.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_ChargeBlaster_D_Ammo2",
+          "name": "High Density Battery",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_ChargeBlaster_B_ChargeAoE_DMG",
+          "name": "Reactive Shockwave",
+          "description": "More bang for the buck! Increases the damage done within ...",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_ChargeBlaster_E_Nightmare",
+          "name": "Burning Nightmare",
+          "description": "A modified containment field causes regular and charged s...",
+          "category": "Heat",
+          "icon": "img/upg/Heat.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_ChargeBlaster_E_ShockCombo",
+          "name": "Thin Containment Field",
+          "description": "A weaker containment field produces less heat for both ch...",
+          "category": "Special",
+          "icon": "img/upg/Special.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_ChargeBlaster_E_PlasmaSplash",
+          "name": "Plasma Splash",
+          "description": "A simple modification to the containment field causes it ...",
+          "category": "Explosion",
+          "icon": "img/upg/Explosion.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_EPC_ChargeCost_B",
+        "name": "Heat Pipe",
+        "type": "balanced",
+        "description": "By channeling exhaust heat back into the charge chamber a...",
+        "icon": "img/upg/Fuel.png",
+        "stats": [
+         {
+          "text": "Improved charged shot efficiency",
+          "good": true
+         },
+         {
+          "text": "Faster charge rate",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_EPC_ChargeDirectDMG_U",
+        "name": "Overcharger",
+        "type": "unstable",
+        "description": "Pushing the EPC to the limit will give you a significant ...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Large charged shot damage bonus",
+          "good": true
+         },
+         {
+          "text": "Much larger AoE",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_EPC_ChargeTime_C",
+        "name": "Energy Rerouting",
+        "type": "clean",
+        "description": "A masterwork of engineering that improves charge speed an...",
+        "icon": "img/upg/ChargeUp.png",
+        "stats": [
+         {
+          "text": "Faster charge rate",
+          "good": true
+         },
+         {
+          "text": "More ammo",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_EPC_CoolingRate_C",
+        "name": "Magnetic Cooling Unit",
+        "type": "clean",
+        "description": "A high-tech solution to cleanly improve the cooling rate....",
+        "icon": "img/upg/Cooling.png",
+        "stats": [
+         {
+          "text": "Slightly faster cooling rate",
+          "good": true
+         },
+         {
+          "text": "Slower heat buildup when fully charged",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_EPC_NormalDamage_B",
+        "name": "Heavy Hitter",
+        "type": "balanced",
+        "description": "Some extensive tweaking to how the shots are prepared can...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Increased normal shot damage",
+          "good": true
+         },
+         {
+          "text": "Less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_EPC_PersistentExplosion_U",
+        "name": "Persistent Plasma",
+        "type": "unstable",
+        "description": "By changing how the plasma is layered within the charged ...",
+        "icon": "img/upg/Duration_V2.png",
+        "stats": [
+         {
+          "text": "Persistent damage area left behind by charged shot explosions",
+          "good": true
+         },
+         {
+          "text": "Decreased charged shot damage",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_EPC_SelfSustainingPlasma_U",
+        "name": "Field Magnifier",
+        "type": "unstable",
+        "description": "A tweaked fusion reaction results in a constantly growing...",
+        "icon": "img/upg/Area.png",
+        "stats": [
+         {
+          "text": "Shots grow in size and damage over time",
+          "good": true
+         },
+         {
+          "text": "Added splash damage to normal shots",
+          "good": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "traversal": [
+     {
+      "index": 1,
+      "id": "DoubleDrills",
+      "name": "Reinforced Power Drills",
+      "category": "Traversal Tool",
+      "description": "One of the classic workhorses of DRG, the twin-linked Pow...",
+      "icon": "img/items/DoubleDrills.png",
+      "iconLine": "img/items/DoubleDrills_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Drills_A_Damage",
+          "name": "Barbed Drills",
+          "description": "More damage inflicted on enemies",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Drills_A_MiningAndMovement",
+          "name": "Hardened Drill Tips",
+          "description": "Drill faster.",
+          "category": "Digging",
+          "icon": "img/upg/Digging.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Drills_A_MoreFuel",
+          "name": "Expanded Fuel Tanks",
+          "description": "Carries more fuel",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Drills_B_CoolingRate",
+          "name": "Magnetic Refrigeration",
+          "description": "Faster cooling for the drills when not in action",
+          "category": "Cooling",
+          "icon": "img/upg/Cooling.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Drills_B_UnjamTime",
+          "name": "Streamlined Integrity Check",
+          "description": "Can use drills sooner after an overheat",
+          "category": "Overheat",
+          "icon": "img/upg/Duration.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Drills_C_MiningAndMovement",
+          "name": "Supercharged Motor",
+          "description": "Drill faster.",
+          "category": "Digging",
+          "icon": "img/upg/Digging.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Drills_C_MoreFuel",
+          "name": "Increased Tank Pressure",
+          "description": "Carries more fuel",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Drils_onDamageHeatReduction",
+          "name": "Bloody Cold Drills",
+          "description": "Your drills cool when drilling enemies!",
+          "category": "Cooling",
+          "icon": "img/upg/Cooling.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "tool": [
+     {
+      "index": 1,
+      "id": "DetPack",
+      "name": "Satchel Charge",
+      "category": "High Explosive",
+      "description": "Be it an obstacle or particularly thickheaded adversary, ...",
+      "icon": "img/items/DetPack.png",
+      "iconLine": "img/items/DetPack_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DetPack_A_Radius",
+          "name": "Fragmentary Shell",
+          "description": "Larger damage radius",
+          "category": "Area of Effect",
+          "icon": "img/upg/Area.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DetPack_A_Ammo",
+          "name": "Extra Satchel Charge",
+          "description": "Can carry one more explosive pack",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_DetPack_A_Damage",
+          "name": "Bigger Charge",
+          "description": "More damage",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DetPack_B_PickUp",
+          "name": "Kill Switch",
+          "description": "Disarm and pick up an unused charge",
+          "category": "Special",
+          "icon": "img/upg/Special.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DetPack_C_Ammo2",
+          "name": "Extra Satchel Charge",
+          "description": "Can carry one more explosive pack",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DetPack_C_DamageAndExplodeOnKill",
+          "name": "Volatile Compound",
+          "description": "New, more powerful, experimental explosives that can deto...",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DetPack_D_IncreasedFearRadius",
+          "name": "Big Bang",
+          "description": "Chance to scare enemies far from the blast",
+          "category": "Fear",
+          "icon": "img/upg/Fear.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DetPack_D_IncreasedStaggerRadius",
+          "name": "Concussive Blast",
+          "description": "Stuns creatures far from the blast",
+          "category": "Stun",
+          "icon": "img/upg/Stun.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_DetPack_D_BiggerCarve",
+          "name": "Rock Mover",
+          "description": "Blast carves a much larger area",
+          "category": "Digging",
+          "icon": "img/upg/Digging.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "armor": [
+     {
+      "index": 1,
+      "id": "Armor_Driller",
+      "name": "\"Mole\" Armor Rig",
+      "category": "Armor Undersuit",
+      "description": "Each set of DRG issue armor is mounted on a highly modifi...",
+      "icon": "img/items/Armor_Driller.png",
+      "iconLine": "img/items/Armor_Driller_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Driller_A_RegenDelay",
+          "name": "Improved Generator",
+          "description": "Shield begins to regenerate sooner.",
+          "category": "Delay",
+          "icon": "img/upg/Duration.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Driller_A_RegenSpeed2",
+          "name": "Boosted Converter",
+          "description": "Shield regenerates at a much faster rate but after a long...",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Armor_Driller_A_MineralCapacity",
+          "name": "Bigger Mineral Bag",
+          "description": "You can collect more of each mineral before needing to de...",
+          "category": "Capacity",
+          "icon": "img/upg/Capacity.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Driller_B_ShieldLarge",
+          "name": "Overcharger",
+          "description": "Your shield can absorb more damage before breaking.",
+          "category": "Resistance",
+          "icon": "img/upg/Resistance.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Driller_B_Health",
+          "name": "Healthy",
+          "description": "Max health increased.",
+          "category": "Health",
+          "icon": "img/upg/Icon_Health.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Driller_C_Insulated",
+          "name": "Temperature Insulation",
+          "description": "For those who prefer it medium rare. Flames will inflict ...",
+          "category": "Fire Resistance",
+          "icon": "img/upg/FireResistance.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Driller_E_BreakAOEDamage",
+          "name": "Shockwave",
+          "description": "Your shield breaks violently, damaging all enemies around...",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Driller_E_BreakAOEStun",
+          "name": "Static Discharge",
+          "description": "Whenever your shield breaks it releases a static discharg...",
+          "category": "Electricity",
+          "icon": "img/upg/Electricity.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Armor_Driller_E_Reviveinvulnerability",
+          "name": "Breathing Room",
+          "description": "Temporary invulnerability after being revived.",
+          "category": "Revive",
+          "icon": "img/upg/Revive.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "grenade": [
+     {
+      "index": 1,
+      "id": "Grenade_Axe",
+      "name": "Impact Axe",
+      "category": "Throwable",
+      "description": "The Impact Axe is the connoisseur choice for the dwarf of...",
+      "icon": "img/items/Grenade_Axe.png",
+      "iconLine": "img/items/Grenade_Axe_line.png",
+      "tiers": [],
+      "overclocks": []
+     },
+     {
+      "index": 2,
+      "id": "Grenade_HighExplosive",
+      "name": "HE Grenade",
+      "category": "Throwable",
+      "description": "A standard high-explosive grenade with a medium kill radi...",
+      "icon": "img/items/Grenade_HighExplosive.png",
+      "iconLine": "img/items/Grenade_HighExplosive_line.png",
+      "tiers": [],
+      "overclocks": []
+     },
+     {
+      "index": 3,
+      "id": "Grenade_Neurotoxin",
+      "name": "Neurotoxin Grenade",
+      "category": "Throwable",
+      "description": "Releases a cloud of slow-acting toxins engineered to excl...",
+      "icon": "img/items/Grenade_Neurotoxin.png",
+      "iconLine": "img/items/Grenade_Neurotoxin_line.png",
+      "tiers": [],
+      "overclocks": []
+     }
+    ],
+    "pickaxe": [
+     {
+      "index": 1,
+      "id": "PickAxe_Driller",
+      "name": "Pickaxe",
+      "category": "Support Tool",
+      "description": "No respectable miner would leave home without it.",
+      "icon": "img/items/PickAxe_Driller.png",
+      "iconLine": "img/items/PickAxe_Driller_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pickaxe_Driller_A_PowerAttack",
+          "name": "Power Attack",
+          "description": "Power Attack.",
+          "category": "Power Attack",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pickaxe_Driller_B_DamagePA",
+          "name": "Serrated Edge",
+          "description": "Serrated Edge.",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pickaxe_Driller_B_RadiusPA",
+          "name": "Shockwave",
+          "description": "Shockwave.",
+          "category": "Area of Effect",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Pickaxe_Driller_B_CooldownPA",
+          "name": "Better Weight Balance",
+          "description": "Better Weight Balance.",
+          "category": "Charge Speed",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ]
+   },
+   "flare": {
+    "index": 1,
+    "id": "Flare_Driller",
+    "name": "Flare",
+    "category": "Support Tool",
+    "description": "A flare.",
+    "icon": "img/items/Flare_Driller.png",
+    "iconLine": "img/items/Flare_Driller_line.png",
+    "tiers": [],
+    "overclocks": []
+   }
+  },
+  {
+   "letter": "S",
+   "key": "scout",
+   "name": "Scout",
+   "icon": "img/class/scout.png",
+   "portrait": "img/class/scout_portrait.png",
+   "slots": {
+    "primary": [
+     {
+      "index": 1,
+      "id": "AssaultRifle",
+      "name": "DeepCore GK2",
+      "category": "Assault Rifle",
+      "description": "A dependable, hefty weapon. Usually not the first choice ...",
+      "icon": "img/items/AssaultRifle.png",
+      "iconLine": "img/items/AssaultRifle_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_AssaultRifle_BaseAccuracy",
+          "name": "Gyro Stabilisation",
+          "description": "Base accuracy improvement with pin-point accuracy on firs...",
+          "category": "Accuracy",
+          "icon": "img/upg/Accuracy.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_AssaultRifle_RoF_A",
+          "name": "Supercharged Feed Mechanism",
+          "description": "We overclocked your gun. It fires faster. Don't ask. Just...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_AssaultRifle_ReloadSpeed_A",
+          "name": "Quickfire Ejector",
+          "description": "Experience, training, and a couple of under-the-table des...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_AssaultRifle_Damage+2",
+          "name": "Increased Caliber Rounds",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_AssaultRifle_MaxAmmo",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_AssaultRifle_SpreadPerShot",
+          "name": "Floating Barrel",
+          "description": "Sweet, sweet optimization. We called in a few friends and...",
+          "category": "Recoil",
+          "icon": "img/upg/Recoil.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_AssaultRifle_ClipSize",
+          "name": "High Capacity Magazine",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_AssaultRifle_WeakspotDamage",
+          "name": "Hollow-Point Bullets",
+          "description": "Hit 'em where it hurts! Literally! We've upped the damage...",
+          "category": "Weak Spot Bonus",
+          "icon": "img/upg/WeakspotBonus.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_AssaultRifle_ArmorDamage",
+          "name": "Hardened Rounds",
+          "description": "We're proud of this one. Armor shredding. Tear through th...",
+          "category": "Armor Breaking",
+          "icon": "img/upg/ArmorBreaking.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_AssaultRifle_EffectesOnKill_E",
+          "name": "Battle Frenzy",
+          "description": "Improved Accuracy and Faster Movement whenever you kill a...",
+          "category": "Special",
+          "icon": "img/upg/Special.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_AssaultRifle_RoF_B",
+          "name": "Improved Gas System",
+          "description": "We overclocked your gun. It fires faster. Don't ask. Just...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_AssaultRifle_StaggerOnWeakspot",
+          "name": "Stun",
+          "description": "Increased chance to stun the target on a weakpoint hit",
+          "category": "Stun",
+          "icon": "img/upg/Stun.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_AssaultRifle_ElectricReload_U",
+        "name": "Electrifying Reload",
+        "type": "unstable",
+        "description": "Embedded capacitors electrocute targets from the inside w...",
+        "icon": "img/upg/Icon_Overclock_Special_Magazine.png",
+        "stats": [
+         {
+          "text": "Electrocute previously hit targets on reload",
+          "good": true
+         },
+         {
+          "text": "Less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_AssaultRifle_PerfectStability_U",
+        "name": "AI Stability Engine",
+        "type": "unstable",
+        "description": "It's like it knows what you are going to do before you do...",
+        "icon": "img/upg/Accuracy.png",
+        "stats": [
+         {
+          "text": "No recoil and a very fast spread recovery",
+          "good": true
+         },
+         {
+          "text": "Increased weakpoint damage",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_AssaultRifle_RoF_B",
+        "name": "Overclocked Firing Mechanism",
+        "type": "balanced",
+        "description": "More bullets faster and it kicks like a mule.",
+        "icon": "img/upg/RateOfFire.png",
+        "stats": [
+         {
+          "text": "Significantly faster rate of fire",
+          "good": true
+         },
+         {
+          "text": "Stronger recoil",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_AssaultRifle_VolatileBullets_B",
+        "name": "Bullets of Mercy",
+        "type": "balanced",
+        "description": "Deal bonus damage to burning, stunned, electrocuted, froz...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Deal significantly more damage to targets that are burning, stunned, electrocuted, frozen, poisoned, etc.",
+          "good": true
+         },
+         {
+          "text": "Decreased magazine capacity",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_AssaultRifle_ClipSize_C",
+        "name": "Compact Ammo",
+        "type": "clean",
+        "description": "Stuff a few more of these compact rounds into each magazi...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "Expanded magazine capacity",
+          "good": true
+         },
+         {
+          "text": "Less recoil",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_AssaultRifle_RandomDamage_C",
+        "name": "Homebrew Powder",
+        "type": "clean",
+        "description": "More damage on average but it's a bit inconsistent.",
+        "icon": "img/upg/Icon_Overclock_ChangeOfHigherDamage.png",
+        "stats": [
+         {
+          "text": "80% to 140% damage output per shot",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_AssaultRifle_RoFandReload_C",
+        "name": "Gas Rerouting",
+        "type": "clean",
+        "description": "Increases the weapon's rate of fire without affecting per...",
+        "icon": "img/upg/RateOfFire.png",
+        "stats": [
+         {
+          "text": "Faster reload",
+          "good": true
+         },
+         {
+          "text": "Faster rate of fire",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 8,
+        "id": "OC_AssaultRifle_BurstFire",
+        "name": "Burst Fire",
+        "type": "balanced",
+        "description": "R&D has fitted a cam mechanism into the GK2's fire contro...",
+        "icon": "img/upg/Special.png",
+        "stats": [
+         {
+          "text": "3-shot burst fire mode.",
+          "good": true
+         },
+         {
+          "text": "Increased damage and stun chance",
+          "good": true
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "index": 2,
+      "id": "M1000",
+      "name": "M1000 Classic",
+      "category": "Semi-Automatic Rifle",
+      "description": "The original design for the M1000-pattern DRG-issue preci...",
+      "icon": "img/items/M1000.png",
+      "iconLine": "img/items/M1000_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_M1000_A_Ammo",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_M1000_A_Damage",
+          "name": "Increased Caliber Rounds",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_M1000_B_FocusSpeed",
+          "name": "Fast-charging Coils",
+          "description": "Focus faster when holding down the trigger.",
+          "category": "Focus Mode",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_M1000_B_Spread",
+          "name": "Better Weight Balance",
+          "description": "Improved hip-shot accuracy and stability",
+          "category": "Recoil",
+          "icon": "img/upg/Recoil.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_M1000_D_ArmorBreaking",
+          "name": "Hardened Rounds",
+          "description": "We're proud of this one. Armor shredding. Tear through th...",
+          "category": "Armor Breaking",
+          "icon": "img/upg/ArmorBreaking.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_M1000_C_FocusDamage",
+          "name": "Killer Focus",
+          "description": "Greater focus damage bonus",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_M1000_B_ClipSize",
+          "name": "Extended Clip",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_M1000_D_Blowthrough",
+          "name": "Super Blowthrough Rounds",
+          "description": "Shaped projectiles designed to over-penetrate targets wit...",
+          "category": "Blowthrough",
+          "icon": "img/upg/Blow_Through.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_M1000_D_WeakspotDamage",
+          "name": "Hollow-Point Bullets",
+          "description": "Hit 'em where it hurts! Literally! We've upped the damage...",
+          "category": "Weak Spot Bonus",
+          "icon": "img/upg/WeakspotBonus.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_M1000_E_FocusStagger",
+          "name": "Hitting where it hurts",
+          "description": "Focused shots stagger the target",
+          "category": "Stun",
+          "icon": "img/upg/Stun.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_M1000_E_FocusFear",
+          "name": "Precision Terror",
+          "description": "Killing your target with a focused shot to the weakspot w...",
+          "category": "Fear",
+          "icon": "img/upg/Fear.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_M1000_E_FastReloadAfterKill",
+          "name": "Killing Machine",
+          "description": "You can perform a lightning-fast reload right after killi...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_M1000_Ammo_C1",
+        "name": "Minimal Clips",
+        "type": "clean",
+        "description": "Increase clip capacity and speed up reloads by getting ri...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "Expanded magazine capacity",
+          "good": true
+         },
+         {
+          "text": "Faster reload",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_M1000_FocusDamage_U",
+        "name": "Supercooling Chamber",
+        "type": "unstable",
+        "description": "Take the M1000's focus mode to the extreme by supercoolin...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Massive focus damage bonus",
+          "good": true
+         },
+         {
+          "text": "Enhanced weakpoint damage bonus on focus shots",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_M1000_FocusElectrocute_U",
+        "name": "Electrocuting Focus Shots",
+        "type": "unstable",
+        "description": "Embedded capacitors in a copper core carry the electric c...",
+        "icon": "img/upg/Electricity.png",
+        "stats": [
+         {
+          "text": "Electrocute target with a focused shot",
+          "good": true
+         },
+         {
+          "text": "Decreased focus shot damage bonus",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_M1000_Hoverclock_C",
+        "name": "Hoverclock",
+        "type": "clean",
+        "description": "Your movement slows down for a few seconds while using fo...",
+        "icon": "img/upg/Icon_Overclock_Slowdown.png",
+        "stats": [
+         {
+          "text": "Movement slows down while using focus mode in the air",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_M1000_NoMovementPenalty_B",
+        "name": "Active Stability System",
+        "type": "balanced",
+        "description": "Focus faster and without slowing down but all that fancy ...",
+        "icon": "img/upg/MovementSpeed.png",
+        "stats": [
+         {
+          "text": "No movement penalty while in focus mode",
+          "good": true
+         },
+         {
+          "text": "Faster focus speed",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_M1000_Hipster_B",
+        "name": "Hipster",
+        "type": "balanced",
+        "description": "A less powerful round together with a rebalancing of weig...",
+        "icon": "img/upg/Accuracy.png",
+        "stats": [
+         {
+          "text": "Much faster spread recovery",
+          "good": true
+         },
+         {
+          "text": "A lot more ammo",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_M1000_FocusWeakening_U",
+        "name": "Marked For Death",
+        "type": "unstable",
+        "description": "Focus Shot now fires a dart loaded with an inflammatory c...",
+        "icon": "img/upg/WeakspotBonus.png",
+        "stats": [
+         {
+          "text": "Focus Shot makes enemies temporarily take more damage",
+          "good": true
+         },
+         {
+          "text": "Increased focus speed",
+          "good": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "secondary": [
+     {
+      "index": 1,
+      "id": "SawedOffShotgun",
+      "name": "Jury-rigged Boomstick",
+      "category": "Shotgun",
+      "description": "You take a shotgun and cut it in half. You're left with a...",
+      "icon": "img/items/SawedOffShotgun.png",
+      "iconLine": "img/items/SawedOffShotgun_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_SawedOff_A_Ammo+6",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_SawedOff_A_Damage",
+          "name": "Double-sized Buckshot",
+          "description": "Bigger and heavier handcrafted specialist dwarf buckshot....",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_SawedOff_B_RoF",
+          "name": "Double Trigger",
+          "description": "Tweaked trigger mechanism allows you to unload both barre...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_SawedOff_B_Reload",
+          "name": "Quickfire Ejector",
+          "description": "Experience, training, and a couple of under-the-table des...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_SawedOff_C_Stagger",
+          "name": "Improved Stun",
+          "description": "Stun enemies more often and for a longer time!",
+          "category": "Stun",
+          "icon": "img/upg/Stun.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_SawedOff_C_Ammo+10",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_SawedOff_C_LoadedShells",
+          "name": "High Capacity Shells",
+          "description": "It took some creative thinking, but we finally found out ...",
+          "category": "Pellet Count",
+          "icon": "img/upg/Shotgun_Pellet.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_SawedOff_D_Blowthrough",
+          "name": "Super Blowthrough Rounds",
+          "description": "Shaped projectiles designed to over-penetrate targets wit...",
+          "category": "Blowthrough",
+          "icon": "img/upg/Blow_Through.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_SawedOff_D_ArmorDamage",
+          "name": "Tungsten Coated Buckshot",
+          "description": "We're proud of this one. Armor shredding. Tear through th...",
+          "category": "Armor Breaking",
+          "icon": "img/upg/ArmorBreaking.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_SawedOff_D_Damage-BlastWave",
+          "name": "Improved Blast Wave",
+          "description": "The shockwave from the blast deals extra damage to any en...",
+          "category": "Special",
+          "icon": "img/upg/Special.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_SawedOff_E_AutoReload",
+          "name": "Auto Reload",
+          "description": "Reloads automatically when unequipped for longer than 5 s...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_SawedOff_E_Fear",
+          "name": "Fear the Boomstick",
+          "description": "Chance to scare nearby creatures whenever you shoot",
+          "category": "Fear",
+          "icon": "img/upg/Fear.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_SawedOff_E_DragonsBreath",
+          "name": "White Phosphorus Shells",
+          "description": "Convert some of the damage to Fire damage",
+          "category": "Heat",
+          "icon": "img/upg/Heat.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_SawedOff_Accuracy_B",
+        "name": "Shaped Shells",
+        "type": "balanced",
+        "description": "Specially shaped shells result in a much tighter shot, bu...",
+        "icon": "img/upg/Accuracy.png",
+        "stats": [
+         {
+          "text": "Significantly reduced base spread",
+          "good": true
+         },
+         {
+          "text": "Small reduction in ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_SawedOff_Damage_U",
+        "name": "Jumbo Shells",
+        "type": "unstable",
+        "description": "These large shells pack a lot more charge for a big incre...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Huge increase in damage",
+          "good": true
+         },
+         {
+          "text": "Significantly less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_SawedOff_DMG_C",
+        "name": "Stuffed Shells",
+        "type": "clean",
+        "description": "With a bit of patience and some luck you can get one more...",
+        "icon": "img/upg/Shotgun_Pellet.png",
+        "stats": [
+         {
+          "text": "More pellets in each shell",
+          "good": true
+         },
+         {
+          "text": "Small damage boost",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_SawedOff_DoubleBarrel_C",
+        "name": "Double Barrel",
+        "type": "unstable",
+        "description": "Unload both barrels at once, no regrets. As an added bonu...",
+        "icon": "img/upg/Special.png",
+        "stats": [
+         {
+          "text": "Unload both barrels at once",
+          "good": true
+         },
+         {
+          "text": "Huge increase in Blast Wave damage",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_SawedOff_MaxAmmo_C",
+        "name": "Compact Shells",
+        "type": "clean",
+        "description": "You can carry a few more of these compact shells in your ...",
+        "icon": "img/upg/Total_Ammo.png",
+        "stats": [
+         {
+          "text": "More ammo",
+          "good": true
+         },
+         {
+          "text": "Faster reload",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_SawedOff_ShotgunJump_C",
+        "name": "Special Powder",
+        "type": "clean",
+        "description": "Less like gunpowder and more like rocketfuel, this mixtur...",
+        "icon": "img/upg/Icon_Overclock_ShotgunJump.png",
+        "stats": [
+         {
+          "text": "Propel yourself in the air using the blast from your shotgun",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_SawedOff_HighPressureRounds_U",
+        "name": "Shockwave Amplifier",
+        "type": "unstable",
+        "description": "High-pressure cartridges fire an explosive shockwave proj...",
+        "icon": "img/upg/Area.png",
+        "stats": [
+         {
+          "text": "Fires a bursting shockwave projectile",
+          "good": true
+         },
+         {
+          "text": "Huge increase in Blast Wave damage",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 8,
+        "id": "OC_SawedOff_IncendiaryDispersers_U",
+        "name": "Dragonfire Shells",
+        "type": "unstable",
+        "description": "Packed with an incendiary compound instead of pellets, sh...",
+        "icon": "img/upg/Heat.png",
+        "stats": [
+         {
+          "text": "Spawn a large cloud of fire!",
+          "good": true
+         },
+         {
+          "text": "No longer shoots pellets",
+          "good": false
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "index": 2,
+      "id": "DualMPs",
+      "name": "Zhukov NUK17",
+      "category": "Submachine Gun",
+      "description": "Never sophisticated, but never disappointing either. The ...",
+      "icon": "img/items/DualMPs.png",
+      "iconLine": "img/items/DualMPs_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DualMP_A_Ammo",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DualMP_A_Damage",
+          "name": "High Velocity Rounds",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DualMP_B_ClipSize",
+          "name": "High Capacity Magazine",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DualMP_B_RoF",
+          "name": "Supercharged Feed Mechanism",
+          "description": "We overclocked your gun. It fires faster. Don't ask. Just...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_DualMP_B_ReloadTime",
+          "name": "Quickfire Ejector",
+          "description": "Experience, training, and a couple of under-the-table des...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DualMP_C_Damage2",
+          "name": "Increased Caliber Rounds",
+          "description": "The good folk in R&D have been busy. The overall damage o...",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DualMP_C_Accuracy",
+          "name": "Better Weight Balance",
+          "description": "Base accuracy increase",
+          "category": "Accuracy",
+          "icon": "img/upg/Accuracy.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DualMP_D_Penetration",
+          "name": "Blowthrough Rounds",
+          "description": "Shaped projectiles designed to over-penetrate targets wit...",
+          "category": "Blowthrough",
+          "icon": "img/upg/Blow_Through.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DualMP_D_Weakspot",
+          "name": "Hollow-Point Bullets",
+          "description": "Hit 'em where it hurts! Literally! We've upped the damage...",
+          "category": "Weak Spot Bonus",
+          "icon": "img/upg/WeakspotBonus.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_DualMP_D_Ammo_2",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_DualMP_E_ElectricBonus",
+          "name": "Conductive Bullets",
+          "description": "More damage to targets that are in an electric field",
+          "category": "Electricity",
+          "icon": "img/upg/Electricity.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_DualMP_E_MovementBonus",
+          "name": "Get in, get out",
+          "description": "Temporary movement speed bonus after emptying clip",
+          "category": "Movement Speed",
+          "icon": "img/upg/MovementSpeed.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": [
+       {
+        "index": 1,
+        "id": "OC_DualMP_CryoMines_U",
+        "name": "Cryo Minelets",
+        "type": "unstable",
+        "description": "After impacting terrain, these high-tech bullets convert ...",
+        "icon": "img/upg/Cold.png",
+        "stats": [
+         {
+          "text": "Bullets convert into cryo minelets upon hitting the ground",
+          "good": true
+         },
+         {
+          "text": "Small decrease in damage",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 2,
+        "id": "OC_DualMP_CustomCasings_B",
+        "name": "Custom Casings",
+        "type": "balanced",
+        "description": "Fit more of these custom rounds in each magazine but at s...",
+        "icon": "img/upg/Magazine_Size.png",
+        "stats": [
+         {
+          "text": "Significant increase in magazine capacity",
+          "good": true
+         },
+         {
+          "text": "Slower rate of fire",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 3,
+        "id": "OC_DualMP_Damage_U",
+        "name": "Gas Recycling",
+        "type": "unstable",
+        "description": "Special hardened bullets combined with rerouting escaping...",
+        "icon": "img/upg/Damage.png",
+        "stats": [
+         {
+          "text": "Significant boost to damage and armor breaking",
+          "good": true
+         },
+         {
+          "text": "Increased base spread",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 4,
+        "id": "OC_DualMP_ExplosiveReload",
+        "name": "Embedded Detonators",
+        "type": "unstable",
+        "description": "Special bullets contain micro-explosives that detonate wh...",
+        "icon": "img/upg/Icon_Overclock_Special_Magazine.png",
+        "stats": [
+         {
+          "text": "Micro-explosives trigger inside targets on reload causing massive damage",
+          "good": true
+         },
+         {
+          "text": "Significantly less ammo",
+          "good": false
+         }
+        ]
+       },
+       {
+        "index": 5,
+        "id": "OC_DualMP_ReloadSpeed_C",
+        "name": "Minimal Magazines",
+        "type": "clean",
+        "description": "By filing away unnecessary material from the magazines yo...",
+        "icon": "img/upg/Reload_Speed.png",
+        "stats": [
+         {
+          "text": "Faster reload",
+          "good": true
+         },
+         {
+          "text": "Faster rate of fire",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 6,
+        "id": "OC_DualMP_RunGun_B",
+        "name": "Tactical Mobility",
+        "type": "balanced",
+        "description": "Advanced stabilisers help you move faster while firing an...",
+        "icon": "img/upg/MovementSpeed.png",
+        "stats": [
+         {
+          "text": "Increased movement speed while firing",
+          "good": true
+         },
+         {
+          "text": "Reduced horizontal spread",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 7,
+        "id": "OC_DualMP_Heavy_U",
+        "name": "High Caliber Rounds",
+        "type": "unstable",
+        "description": "Fully refurbished firing chambers and barrels as well as ...",
+        "icon": "img/upg/Accuracy.png",
+        "stats": [
+         {
+          "text": "Significant damage boost",
+          "good": true
+         },
+         {
+          "text": "Increased weakpoint damage",
+          "good": true
+         }
+        ]
+       },
+       {
+        "index": 8,
+        "id": "OC_DualMP_FearBerzerkovs_B",
+        "name": "Berzerkovs",
+        "type": "balanced",
+        "description": "Cause an AOE of fear on emptying a clip",
+        "icon": "img/upg/Fear.png",
+        "stats": [
+         {
+          "text": "Cause fear on emptying a clip",
+          "good": true
+         },
+         {
+          "text": "Small damage bonus",
+          "good": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "traversal": [
+     {
+      "index": 1,
+      "id": "GrapplingGun",
+      "name": "Grappling Hook",
+      "category": "Traversal Tool",
+      "description": "The ultimate explorer's tool - this self-recharging grapp...",
+      "icon": "img/items/GrapplingGun.png",
+      "iconLine": "img/items/GrapplingGun_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_GrapplingGun_A_Cooldown",
+          "name": "Improved Recharger",
+          "description": "Spend less time waiting and more time swinging",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_GrapplingGun_A_Range",
+          "name": "Longer Cable",
+          "description": "Increased range",
+          "category": "Reach",
+          "icon": "img/upg/Reach.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_GrapplingGun_B_Range",
+          "name": "Greater Cable Stretch",
+          "description": "Increased range",
+          "category": "Reach",
+          "icon": "img/upg/Reach.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_GrapplingGun_C_ProjectileSpeed",
+          "name": "High Velocity Ejection System",
+          "description": "Hook shoots out at a higher speed",
+          "category": "Projectile Speed",
+          "icon": "img/upg/ProjectileSpeed.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_GrapplingGun_C_MaxTravelSpeed",
+          "name": "Overcharged Winch",
+          "description": "Faster hook retraction means a faster dwarf. Survival not...",
+          "category": "Movement Speed",
+          "icon": "img/upg/MovementSpeed.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_GrapplingGun_D_FallDamageReduction",
+          "name": "Safety First",
+          "description": "Temporary fall damage reduction bonus after releasing the...",
+          "category": "Resistance",
+          "icon": "img/upg/Resistance.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_GrapplingGun_D_MovementSpeedBoost",
+          "name": "Momentum",
+          "description": "Burst of Speed! Using the Grappling Gun gives you a Tempo...",
+          "category": "Movement Speed",
+          "icon": "img/upg/MovementSpeed.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_GrapplingGun_C_Cooldown",
+          "name": "Bypassed Integrity Check",
+          "description": "Faster cooldown and a voided warranty",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "tool": [
+     {
+      "index": 1,
+      "id": "FlareGun",
+      "name": "Flare Gun",
+      "category": "Support Tool",
+      "description": "A powerful projectile launcher that shoots high-intensity...",
+      "icon": "img/items/FlareGun.png",
+      "iconLine": "img/items/FlareGun_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_FlareGun_A_MaxAmmo",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_FlareGun_A_Duration",
+          "name": "Thicker Core",
+          "description": "More core material for a longer burn",
+          "category": "Duration",
+          "icon": "img/upg/Duration_V2.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_FlareGun_B_RoF",
+          "name": "Supercharged Feed Mechanism",
+          "description": "We overclocked your gun. It fires faster. Don't ask. Just...",
+          "category": "Rate of Fire",
+          "icon": "img/upg/RateOfFire.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_FlareGun_B_ClipSize",
+          "name": "High Capacity Magazine",
+          "description": "The good thing about clips, magazines, ammo drums, fuel t...",
+          "category": "Magazine Size",
+          "icon": "img/upg/Magazine_Size.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_FlareGun_C_Autoreload",
+          "name": "Auto Reload",
+          "description": "Reloads automatically when unequipped for longer than 5 s...",
+          "category": "Reload Speed",
+          "icon": "img/upg/Reload_Speed.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_FlareGun_C_MaxAmmo_2",
+          "name": "Expanded Ammo Bags",
+          "description": "You had to give up some sandwich-storage, but your total ...",
+          "category": "Total Ammo",
+          "icon": "img/upg/Total_Ammo.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_FlareGun_C_Duration_2",
+          "name": "Magnesium Core",
+          "description": "A solid magnesium core is added to the flare, increasing ...",
+          "category": "Duration",
+          "icon": "img/upg/Duration_V2.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "armor": [
+     {
+      "index": 1,
+      "id": "Armor_Scout",
+      "name": "\"Fox\" Armor Rig",
+      "category": "Armor Undersuit",
+      "description": "Each set of DRG issue armor is mounted on a highly modifi...",
+      "icon": "img/items/Armor_Scout.png",
+      "iconLine": "img/items/Armor_Scout_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Scout_A_RegenDelay",
+          "name": "Improved Generator",
+          "description": "Shield begins to regenerate sooner.",
+          "category": "Delay",
+          "icon": "img/upg/Duration.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Scout_A_RegenSpeed2",
+          "name": "Boosted Converter",
+          "description": "Shield regenerates at a much faster rate but after a long...",
+          "category": "Charge Speed",
+          "icon": "img/upg/ChargeUp.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Armor_Scout_A_MineralCapacity",
+          "name": "Bigger Mineral Bag",
+          "description": "You can collect more of each mineral before needing to de...",
+          "category": "Capacity",
+          "icon": "img/upg/Capacity.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Scout_B_ShieldLarge",
+          "name": "Overcharger",
+          "description": "Your shield can absorb more damage before breaking.",
+          "category": "Resistance",
+          "icon": "img/upg/Resistance.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Scout_B_Health",
+          "name": "Healthy",
+          "description": "Max health increased.",
+          "category": "Health",
+          "icon": "img/upg/Icon_Health.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Scout_C_FallDamage",
+          "name": "Shock Absorbers",
+          "description": "Built-in shock absorbers make falling less painful.",
+          "category": "Fall Damage Resistance",
+          "icon": "img/upg/Fall_Damage_Resistance.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Armor_Scout_E_BreakAOEDamage",
+          "name": "Shockwave",
+          "description": "Your shield breaks violently, damaging all enemies around...",
+          "category": "Area Damage",
+          "icon": "img/upg/Area_Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Armor_Scout_E_BreakAOEStun",
+          "name": "Static Discharge",
+          "description": "Whenever your shield breaks it releases a static discharg...",
+          "category": "Electricity",
+          "icon": "img/upg/Electricity.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Armor_Scout_E_Reviveinvulnerability",
+          "name": "Breathing Room",
+          "description": "Temporary invulnerability after being revived.",
+          "category": "Revive",
+          "icon": "img/upg/Revive.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ],
+    "grenade": [
+     {
+      "index": 1,
+      "id": "Grenade_IFG",
+      "name": "IFG",
+      "category": "Throwable",
+      "description": "The IFG - or Inhibitor-Field Generator - is one of the la...",
+      "icon": "img/items/Grenade_IFG.png",
+      "iconLine": "img/items/Grenade_IFG_line.png",
+      "tiers": [],
+      "overclocks": []
+     },
+     {
+      "index": 2,
+      "id": "Grenade_Freeze",
+      "name": "Cryo Grenade",
+      "category": "Throwable",
+      "description": "Critically lowers the temperature of anything and everyth...",
+      "icon": "img/items/Grenade_Freeze.png",
+      "iconLine": "img/items/Grenade_Freeze_line.png",
+      "tiers": [],
+      "overclocks": []
+     },
+     {
+      "index": 3,
+      "id": "Grenade_Pheromone",
+      "name": "Pheromone Canister",
+      "category": "Throwable",
+      "description": "Any creature covered by the substance within becomes an i...",
+      "icon": "img/items/Grenade_Pheromone.png",
+      "iconLine": "img/items/Grenade_Pheromone_line.png",
+      "tiers": [],
+      "overclocks": []
+     }
+    ],
+    "pickaxe": [
+     {
+      "index": 1,
+      "id": "PickAxe_Scout",
+      "name": "Pickaxe",
+      "category": "Support Tool",
+      "description": "No respectable miner would leave home without it.",
+      "icon": "img/items/PickAxe_Scout.png",
+      "iconLine": "img/items/PickAxe_Scout_line.png",
+      "tiers": [
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pickaxe_Scout_A_PowerAttack",
+          "name": "Power Attack",
+          "description": "Power Attack.",
+          "category": "Power Attack",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       },
+       {
+        "options": [
+         {
+          "index": 1,
+          "id": "UPG_Pickaxe_Scout_B_DamagePA",
+          "name": "Serrated Edge",
+          "description": "Serrated Edge.",
+          "category": "Damage",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 2,
+          "id": "UPG_Pickaxe_Scout_B_RadiusPA",
+          "name": "Shockwave",
+          "description": "Shockwave.",
+          "category": "Area of Effect",
+          "icon": "img/upg/Damage.png"
+         },
+         {
+          "index": 3,
+          "id": "UPG_Pickaxe_Scout_B_CooldownPA",
+          "name": "Better Weight Balance",
+          "description": "Better Weight Balance.",
+          "category": "Charge Speed",
+          "icon": "img/upg/Damage.png"
+         }
+        ]
+       }
+      ],
+      "overclocks": []
+     }
+    ]
+   },
+   "flare": {
+    "index": 1,
+    "id": "Flare_Scout",
+    "name": "Flare",
+    "category": "Support Tool",
+    "description": "A flare.",
+    "icon": "img/items/Flare_Scout.png",
+    "iconLine": "img/items/Flare_Scout_line.png",
+    "tiers": [],
+    "overclocks": []
+   }
+  }
+ ],
+ "perks": [
+  {
+   "id": 1,
+   "asset": "PERK_Berzerker",
+   "name": "Berzerker",
+   "type": "active",
+   "icon": "img/perks/Berzerker.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 300,
+   "charges": 0
+  },
+  {
+   "id": 2,
+   "asset": "PERK_DeepPockets",
+   "name": "Deep Pockets",
+   "type": "passive",
+   "icon": "img/perks/DeepPockets.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 3,
+   "asset": "PERK_ExpertDepositor",
+   "name": "Veteran Depositor",
+   "type": "passive",
+   "icon": "img/perks/ExpertDepositor.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 4,
+   "asset": "PERK_FieldMedic",
+   "name": "Field Medic",
+   "type": "active",
+   "icon": "img/perks/FieldMedic.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 1,
+   "charges": 1
+  },
+  {
+   "id": 5,
+   "asset": "PERK_RedSugarRocks",
+   "name": "Sweet Tooth",
+   "type": "passive",
+   "icon": "img/perks/RedSugarRocks.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 6,
+   "asset": "PERK_Resupplier",
+   "name": "Resupplier",
+   "type": "passive",
+   "icon": "img/perks/Resupplier.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 7,
+   "asset": "PERK_StrongBack",
+   "name": "Unstoppable",
+   "type": "passive",
+   "icon": "img/perks/StrongBack.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 8,
+   "asset": "PERK_IronWill",
+   "name": "Iron Will",
+   "type": "active",
+   "icon": "img/perks/IronWill.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 1,
+   "charges": 1
+  },
+  {
+   "id": 9,
+   "asset": "PERK_Vampire",
+   "name": "Vampire",
+   "type": "passive",
+   "icon": "img/perks/Vampire.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 10,
+   "asset": "PERK_FlareThrower",
+   "name": "Strong Arm",
+   "type": "passive",
+   "icon": "img/perks/FlareThrower.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 11,
+   "asset": "PERK_FriendlyFire",
+   "name": "Friendly",
+   "type": "passive",
+   "icon": "img/perks/FriendlyFire.png",
+   "description": "Sample text.",
+   "ranks": 1,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 12,
+   "asset": "PERK_HeightenedSenses",
+   "name": "Heightened Senses",
+   "type": "active",
+   "icon": "img/perks/HeightenedSenses.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 90,
+   "charges": 1
+  },
+  {
+   "id": 13,
+   "asset": "PERK_TemperatureInsulation",
+   "name": "Elemental Insulation",
+   "type": "passive",
+   "icon": "img/perks/TemperatureInsulation.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 14,
+   "asset": "PERK_MarathonGuy",
+   "name": "Second Wind",
+   "type": "passive",
+   "icon": "img/perks/MarathonGuy.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 15,
+   "asset": "PERK_BornReady",
+   "name": "Born Ready",
+   "type": "passive",
+   "icon": "img/perks/BornReady.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 16,
+   "asset": "PERK_ShieldLink",
+   "name": "Shield Link",
+   "type": "active",
+   "icon": "img/perks/ShieldLink.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 30,
+   "charges": 0
+  },
+  {
+   "id": 17,
+   "asset": "PERK_Dash",
+   "name": "Dash",
+   "type": "active",
+   "icon": "img/perks/Dash.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 60,
+   "charges": 0
+  },
+  {
+   "id": 18,
+   "asset": "PERK_BugThing",
+   "name": "It's a Bug Thing",
+   "type": "passive",
+   "icon": "img/perks/BugThing.png",
+   "description": "Sample text.",
+   "ranks": 2,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 19,
+   "asset": "PERK_BeastMaster",
+   "name": "Beast Master",
+   "type": "active",
+   "icon": "img/perks/BeastMaster.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 300,
+   "charges": 0
+  },
+  {
+   "id": 20,
+   "asset": "PERK_DownedBomb",
+   "name": "See You in Hell",
+   "type": "active",
+   "icon": "img/perks/DownedBomb.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 240,
+   "charges": 3
+  },
+  {
+   "id": 21,
+   "asset": "PERK_Thorns",
+   "name": "Thorns",
+   "type": "passive",
+   "icon": "img/perks/Thorns.png",
+   "description": "Sample text.",
+   "ranks": 4,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 22,
+   "asset": "PERK_HoverBoots",
+   "name": "Hover Boots",
+   "type": "active",
+   "icon": "img/perks/HoverBoots.png",
+   "description": "Sample text.",
+   "ranks": 5,
+   "cooldown": 120,
+   "charges": 0
+  },
+  {
+   "id": 23,
+   "asset": "PERK_ManagementsFavorite",
+   "name": "Management's Favorite",
+   "type": "active",
+   "icon": "img/perks/ManagementsFavorite.png",
+   "description": "Sample text.",
+   "ranks": 2,
+   "cooldown": 0,
+   "charges": 1
+  },
+  {
+   "id": 24,
+   "asset": "PERK_SecondChance",
+   "name": "Second Chance",
+   "type": "passive",
+   "icon": "img/perks/SecondChance.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 25,
+   "asset": "PERK_Executioner",
+   "name": "Precision Streak",
+   "type": "passive",
+   "icon": "img/perks/Executioner.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 26,
+   "asset": "PERK_LiquidCourage",
+   "name": "Liquid Courage",
+   "type": "active",
+   "icon": "img/perks/LiquidCourage.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 1
+  },
+  {
+   "id": 27,
+   "asset": "PERK_FinishThem",
+   "name": "Splatter Shield",
+   "type": "passive",
+   "icon": "img/perks/FinishThem.png",
+   "description": "Sample text.",
+   "ranks": 2,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 28,
+   "asset": "PERK_LastCall",
+   "name": "Clock Out Fervor",
+   "type": "passive",
+   "icon": "img/perks/LastCall.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 29,
+   "asset": "PERK_FearTheBeard",
+   "name": "Fear The Beard",
+   "type": "active",
+   "icon": "img/perks/FearTheBeard.png",
+   "description": "Sample text.",
+   "ranks": 2,
+   "cooldown": 60,
+   "charges": 0
+  },
+  {
+   "id": 30,
+   "asset": "PERK_PickKills",
+   "name": "Momentum Strike",
+   "type": "passive",
+   "icon": "img/perks/PickKills.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 31,
+   "asset": "PERK_NoDwarfLeftBehind",
+   "name": "Pressure Performer",
+   "type": "passive",
+   "icon": "img/perks/NoDwarfLeftBehind.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 32,
+   "asset": "PERK_HoldTheLine",
+   "name": "Hold The Line",
+   "type": "passive",
+   "icon": "img/perks/HoldTheLine.png",
+   "description": "Sample text.",
+   "ranks": 3,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 33,
+   "asset": "PERK_Taunt",
+   "name": "Taunt",
+   "type": "active",
+   "icon": "img/perks/Taunt.png",
+   "description": "Sample text.",
+   "ranks": 2,
+   "cooldown": 60,
+   "charges": 0
+  },
+  {
+   "id": 34,
+   "asset": "Proficiency_Combat",
+   "name": "Combat Proficiency",
+   "type": "proficiency",
+   "icon": "img/perks/Proficiency_Combat.png",
+   "description": "Sample text.",
+   "ranks": 0,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 35,
+   "asset": "Proficiency_Survival",
+   "name": "Survival Proficiency",
+   "type": "proficiency",
+   "icon": "img/perks/Proficiency_Survival.png",
+   "description": "Sample text.",
+   "ranks": 0,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 36,
+   "asset": "Proficiency_Mobility",
+   "name": "Mobility Proficiency",
+   "type": "proficiency",
+   "icon": "img/perks/Proficiency_Mobility.png",
+   "description": "Sample text.",
+   "ranks": 0,
+   "cooldown": 0,
+   "charges": 0
+  },
+  {
+   "id": 37,
+   "asset": "Proficiency_Resourcefulness",
+   "name": "Resourcefulness Proficiency",
+   "type": "proficiency",
+   "icon": "img/perks/Proficiency_Resourcefulness.png",
+   "description": "Sample text.",
+   "ranks": 0,
+   "cooldown": 0,
+   "charges": 0
+  }
+ ],
+ "perkSlots": {
+  "passive": 3,
+  "active": 2,
+  "proficiency": 1
+ },
+ "frames": {
+  "ocClean": "img/frames/oc_clean.png"
+ },
+ "colors": {
+  "clean": "#379C5D",
+  "balanced": "#E9CA37",
+  "unstable": "#D33600",
+  "passive": "#B92E4E",
+  "active": "#4BBFA5",
+  "proficiency": "#FF9C00",
+  "orange": "#FF9C00"
+ }
+}

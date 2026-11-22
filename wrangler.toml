@@ -1,0 +1,9 @@
+name = "dwarfbuilds"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-11-19"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dwarfbuilds-db"
+database_id = "fa5516b5-dea5-4735-a419-ff2589875994"
+migrations_dir = "migrations"

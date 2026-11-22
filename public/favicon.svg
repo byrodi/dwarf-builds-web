@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><mask id="hammer"><path fill="#fff" d="M32 2 58 17v30L32 62 6 47V17z"/><g fill="#000" transform="rotate(-40 32 33)"><path d="M19 17h23l5 3v5l-5 3H19z"/><rect x="28.5" y="27" width="7" height="25" rx="2.5"/></g></mask></defs><path fill="#FF9C00" d="M32 2 58 17v30L32 62 6 47V17z" mask="url(#hammer)"/></svg>

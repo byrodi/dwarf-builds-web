@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local dev (wrangler pages dev). Never commit .dev.vars.
+# Dev-only values. Production secrets live only in Cloudflare Pages secrets.
+SESSION_SECRET=dev-local-only
+DEV_LOGIN=1
+# STEAM_API_KEY=
+# ADMIN_STEAM_IDS=76561197960287930

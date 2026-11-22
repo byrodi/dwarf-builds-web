@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dwarf Builds</title>
+<meta name="description" content="Deep Rock Galactic builds: browse, make and share loadout codes for the Dwarf Builds mod.">
+<!--og-->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Chakra+Petch:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="/css/site.css">
+<script type="module" src="/js/app.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="/" data-link>
+      <span class="logo-hex" aria-hidden="true"></span>
+      <span class="logo-text">DWARF<b>BUILDS</b></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a class="nav-link" href="/" data-nav="browse">BROWSE</a>
+      <a class="nav-link" href="/new" data-nav="new">NEW BUILD</a>
+      <a class="nav-link" href="/me" data-nav="me">MY BUILDS</a>
+    </nav>
+    <div class="account" id="account"></div>
+  </div>
+</header>
+<div class="notice-bar" id="notice" hidden></div>
+<main id="app" class="app" tabindex="-1">
+  <div class="state state-loading"><span class="spinner" aria-hidden="true"></span><span>LOADING</span></div>
+</main>
+<footer class="foot">
+  <div class="foot-in">
+    <span>Dwarf Builds is a fan site for Deep Rock Galactic. Not affiliated with Ghost Ship Games.</span>
+    <span id="data-version"></span>
+  </div>
+</footer>
+<div class="tip" id="tip" hidden></div>
+<noscript><div class="state">This site needs JavaScript.</div></noscript>
+</body>
+</html>

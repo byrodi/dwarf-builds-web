@@ -1,0 +1,23 @@
+{
+  "name": "dwarfbuilds-web",
+  "description": "Browse and share Deep Rock Galactic builds as codes for the Dwarf Builds mod.",
+  "license": "MIT",
+  "homepage": "https://dwarfbuilds.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byrodi/dwarf-builds-web.git"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev --port 8788",
+    "test": "node --test \"tests/*.test.js\"",
+    "check-secrets": "node scripts/check-secrets.mjs",
+    "deploy": "npm run check-secrets && npm test && wrangler pages deploy --branch main --commit-dirty=true",
+    "migrate:local": "wrangler d1 migrations apply dwarfbuilds-db --local",
+    "migrate:remote": "wrangler d1 migrations apply dwarfbuilds-db --remote"
+  },
+  "devDependencies": {
+    "wrangler": "4.166.0"
+  }
+}
