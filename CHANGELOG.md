@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-22
+
 ### Changed
 
 - Pages load faster: the scripts and the game data are requested at once instead of one after another, and the
@@ -26,5 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Admin page with the report queue.
 - Profanity filter for titles and descriptions.
 
-[unreleased]: https://github.com/byrodi/dwarf-builds-web/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/byrodi/dwarf-builds-web/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/byrodi/dwarf-builds-web/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/byrodi/dwarf-builds-web/releases/tag/v0.1.0
