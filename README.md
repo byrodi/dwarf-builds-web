@@ -5,13 +5,17 @@ Browse and share Deep Rock Galactic builds as codes for the Dwarf Builds mod.
 Live at [dwarfbuilds.pages.dev](https://dwarfbuilds.pages.dev). The mod and the game data exporter are in
 [byrodi/dwarf-builds-drg](https://github.com/byrodi/dwarf-builds-drg).
 
+![Browse builds: cards with class, weapons and overclocks, sorted by HOT, NEW or TOP](.github/images/browse.jpg)
+
 ## Features
 
-- Browse builds by class, weapon and overclock, newest or most liked.
+- Browse builds by class, weapon and overclock; sort by HOT, NEW or TOP of the week, month or all time.
 - Each build shows its loadout and stats the way the game does.
 - Make a build in an editor shaped like the game's loadout screen.
 - Sign in with Steam to publish; descriptions take Markdown.
-- Copy a build code, and the mod in game offers to take it.
+- Copy a build code and paste it on the mod's BUILD CODE tab in game; TAKE BUILD saves it into a loadout.
+
+![A build page drawn like the game's loadout screen, with its code and description](.github/images/build-page.jpg)
 
 ## How it is built
 
