@@ -33,11 +33,38 @@ async function call(method, path, body) {
   return data;
 }
 
+// Answers to GET are kept for a short time, by path: going back to a list or opening the same build again draws
+// at once, and the router can ask for a page's data before the page does (the page then gets that same answer).
+// A failed call is not kept, and any write drops them all. Two minutes: long enough to read a build and go back
+// to the list, so what others did meanwhile (a like, a new build) shows that much later.
+const KEEP_MS = 120000;
+const KEEP_MAX = 40;
+const kept = new Map(); // path -> { at, promise }
+
+function get(path) {
+  const hit = kept.get(path);
+  if (hit && Date.now() - hit.at < KEEP_MS) return hit.promise;
+  const promise = call("GET", path);
+  kept.delete(path);
+  kept.set(path, { at: Date.now(), promise });
+  if (kept.size > KEEP_MAX) kept.delete(kept.keys().next().value);
+  promise.catch(() => {
+    const now = kept.get(path);
+    if (now && now.promise === promise) kept.delete(path);
+  });
+  return promise;
+}
+
+function write(method, path, body) {
+  kept.clear();
+  return call(method, path, body).finally(() => kept.clear());
+}
+
 export const api = {
-  get: (path) => call("GET", path),
-  post: (path, body) => call("POST", path, body),
-  put: (path, body) => call("PUT", path, body),
-  del: (path) => call("DELETE", path, {}),
+  get,
+  post: (path, body) => write("POST", path, body),
+  put: (path, body) => write("PUT", path, body),
+  del: (path) => write("DELETE", path, {}),
 };
 
 // Friendly text for an API error.

@@ -12,15 +12,17 @@ const WEAPON_SLOTS = ["primary", "secondary"];
 const SORTS = ["hot", "new", "top"];
 const PERIODS = [["week", "THIS WEEK"], ["month", "THIS MONTH"], ["all", "ALL TIME"]];
 
-export async function browsePage(ctx) {
-  const g = getGame();
-  const q = ctx.query;
-  const weaponsOf = (c) => WEAPON_SLOTS.flatMap((s) => c.slots[s] || []);
-  // overclock id -> { cls, weapon, oc } (the filter picks one overclock of one weapon)
+const weaponsOf = (c) => WEAPON_SLOTS.flatMap((s) => c.slots[s] || []);
+
+// overclock id -> { cls, weapon, oc } (the filter picks one overclock of one weapon)
+function overclocksOf(g) {
   const ocs = new Map();
   for (const c of g.classes) for (const w of weaponsOf(c)) for (const o of w.overclocks || []) ocs.set(o.id, { cls: c, weapon: w, oc: o });
-  const classOf = (itemId) => g.classes.find((c) => weaponsOf(c).some((w) => w.id === itemId)) || null;
+  return ocs;
+}
 
+// The filters an address asks for ("/?class=scout&sort=new"), checked against the game data.
+function readState(q, ocs) {
   const st = {
     cls: classByKey(q.get("class")),
     item: q.get("item") || "",
@@ -37,6 +39,30 @@ export async function browsePage(ctx) {
     st.item = o.weapon.id;
     st.cls = o.cls;
   }
+  return st;
+}
+
+// The API call that lists the builds of these filters.
+function listUrl(st) {
+  const p = new URLSearchParams({ sort: st.sort, page: String(st.page) });
+  if (st.sort === "top") p.set("period", st.period);
+  if (st.cls) p.set("class", st.cls.letter);
+  if (st.item) p.set("item", st.item);
+  if (st.oc) p.set("oc", st.oc);
+  if (st.q) p.set("q", st.q);
+  return "/api/builds?" + p.toString();
+}
+
+// The first call of the page at this address (app.js asks for it before the page starts).
+export function browseFirst(params, query) {
+  return listUrl(readState(query, overclocksOf(getGame())));
+}
+
+export async function browsePage(ctx) {
+  const g = getGame();
+  const ocs = overclocksOf(g);
+  const classOf = (itemId) => g.classes.find((c) => weaponsOf(c).some((w) => w.id === itemId)) || null;
+  const st = readState(ctx.query, ocs);
 
   const results = h("div");
   const tabs = h("div.tabs");
@@ -226,42 +252,43 @@ export async function browsePage(ctx) {
     }, 350);
   });
 
+  function show(...children) {
+    results.classList.remove("stale");
+    mount(results, ...children);
+  }
+
   let seq = 0;
   async function load() {
     syncUrl();
     const mine = ++seq;
-    mount(results, loadingState());
-    const p = new URLSearchParams({ sort: st.sort, page: String(st.page) });
-    if (st.sort === "top") p.set("period", st.period);
-    if (st.cls) p.set("class", st.cls.letter);
-    if (st.item) p.set("item", st.item);
-    if (st.oc) p.set("oc", st.oc);
-    if (st.q) p.set("q", st.q);
+    // Cards on screen stay until the new ones are here; anything else gives way to LOADING.
+    if (results.querySelector(".cards")) results.classList.add("stale");
+    else mount(results, loadingState());
     let data;
     try {
-      data = await api.get("/api/builds?" + p.toString());
+      data = await api.get(listUrl(st));
     } catch (e) {
       if (mine !== seq || !ctx.alive()) return;
-      mount(results, errorState("COULD NOT LOAD BUILDS", errorText(e), [button("RETRY", { onclick: load })]));
+      show(errorState("COULD NOT LOAD BUILDS", errorText(e), [button("RETRY", { onclick: load })]));
       return;
     }
     if (mine !== seq || !ctx.alive()) return;
     if (!data.builds.length && st.sort === "top" && st.period !== "all" && st.page === 1) {
       // TOP of a period lists only builds liked in it.
-      mount(results, errorState("NO LIKES IN THIS PERIOD", "No build that matches got a like in this period yet.",
+      show(errorState("NO LIKES IN THIS PERIOD", "No build that matches got a like in this period yet.",
         [button("ALL TIME", { kind: "sec", onclick: () => { st.period = "all"; periodPick.value = "all"; load(); } })]));
       return;
     }
     if (!data.builds.length) {
       const filtered = st.cls || st.item || st.oc || st.q;
-      mount(results, errorState(st.page > 1 ? "NO MORE BUILDS" : "NO BUILDS FOUND",
+      show(errorState(st.page > 1 ? "NO MORE BUILDS" : "NO BUILDS FOUND",
         filtered ? "Nothing matches these filters yet. Try another class, weapon or overclock, or make the first one."
           : "No one has shared a build yet. Be the first.",
         [filtered ? button("CLEAR FILTERS", { kind: "sec", onclick: clearAll }) : null,
           button("NEW BUILD", { href: "/new" })]));
       return;
     }
-    mount(results, cardGrid(data.builds), pager(data.page, data.hasMore, (n) => {
+    show(cardGrid(data.builds), pager(data.page, data.hasMore, (n) => {
       st.page = n;
       load();
       window.scrollTo(0, 0);

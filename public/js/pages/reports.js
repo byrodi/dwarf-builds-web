@@ -4,7 +4,7 @@
 
 import { h, mount, formatDate } from "../dom.js";
 import { api, errorText, loginUrl } from "../api.js";
-import { button, loadingState, errorState, feedback, setLabel } from "../ui.js";
+import { button, showLoading, errorState, feedback, setLabel } from "../ui.js";
 import { buildCard, pager } from "../cards.js";
 
 export async function reportsPage(ctx) {
@@ -19,7 +19,7 @@ export async function reportsPage(ctx) {
     return;
   }
   const page = Math.max(1, parseInt(ctx.query.get("page") || "1", 10) || 1);
-  mount(ctx.app, loadingState());
+  showLoading(ctx.app);
   let data;
   try {
     data = await api.get(`/api/admin/reports?page=${page}`);

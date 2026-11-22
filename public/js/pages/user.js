@@ -2,7 +2,7 @@
 
 import { h, mount, formatDate } from "../dom.js";
 import { api, errorText, loginUrl } from "../api.js";
-import { button, loadingState, errorState, avatar } from "../ui.js";
+import { button, showLoading, errorState, avatar } from "../ui.js";
 import { cardGrid, pager } from "../cards.js";
 
 export async function mePage(ctx) {
@@ -18,14 +18,22 @@ export async function mePage(ctx) {
   await ctx.navigate(`/u/${ctx.me.steamId}`, { replace: true });
 }
 
+const pageOf = (query) => Math.max(1, parseInt(query.get("page") || "1", 10) || 1);
+const userUrl = (steamId, page) => `/api/users/${encodeURIComponent(steamId)}?page=${page}`;
+
+// The first call of the page (app.js asks for it before the page starts).
+export function userFirst(params, query) {
+  return userUrl(params[0], pageOf(query));
+}
+
 export async function userPage(ctx, steamIdArg) {
   const steamId = steamIdArg || ctx.params[0];
   const mine = !!ctx.me && ctx.me.steamId === steamId;
-  const page = Math.max(1, parseInt(ctx.query.get("page") || "1", 10) || 1);
-  mount(ctx.app, loadingState());
+  const page = pageOf(ctx.query);
+  showLoading(ctx.app);
   let data;
   try {
-    data = await api.get(`/api/users/${encodeURIComponent(steamId)}?page=${page}`);
+    data = await api.get(userUrl(steamId, page));
   } catch (e) {
     if (!ctx.alive()) return;
     if (e.status === 404 && mine) {

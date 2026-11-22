@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Pages load faster: the scripts and the game data are requested at once instead of one after another, and the
+  session and the page's data are asked for in parallel.
+- The browser keeps game pictures for a week and the game data between visits instead of asking for them every time.
+- Going back to a list, or opening the same build again within two minutes, draws without a new request.
+- LOADING shows only on a long wait, and a new filter keeps the old cards on screen until the new ones arrive.
+
 ## [0.1.0] - 2026-11-22
 
 ### Added

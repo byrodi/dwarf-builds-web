@@ -357,6 +357,14 @@ export function loadingState(text = "LOADING") {
   return h("div.state.state-loading", h("span.spinner", { "aria-hidden": "true" }), h("span", { text }));
 }
 
+// Puts LOADING alone in el. One that is there already stays: it fades in late (site.css), so that a fast load
+// never flashes it, and a new one would start that wait again.
+export function showLoading(el) {
+  const now = el.firstElementChild;
+  if (now && el.childElementCount === 1 && now.classList.contains("state-loading")) return;
+  mount(el, loadingState());
+}
+
 export function errorState(title, text, actions) {
   return h("div.state", h("h2", { text: title }), text ? h("p", { text }) : null, actions ? h("div.actions", actions) : null);
 }

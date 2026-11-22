@@ -1,3 +1,18 @@
+# Pages answers every file with "max-age=0, must-revalidate": the browser asks again on each visit.
+# Game pictures keep their names and change only with a game update: a week in the browser.
+/img/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+# game.json: used from the browser's copy at once and refreshed behind it, so a new export shows one visit later.
+/data/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=604800
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+/rodi.svg
+  Cache-Control: public, max-age=604800
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: same-origin

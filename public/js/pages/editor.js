@@ -9,7 +9,7 @@ import { api, errorText, loginUrl } from "../api.js";
 import { getGame, classByLetter, itemsOf, itemAt, perkById, PERK_TYPES } from "../game.js";
 import { parseCode, validateBuild, encodeCode, PREFIX } from "../shared/code.js";
 import {
-  classIcon, button, copyButton, modal, confirmModal, loadingState, errorState, hideTip, setLabel, feedback, flash,
+  classIcon, button, copyButton, modal, confirmModal, showLoading, errorState, hideTip, setLabel, feedback, flash,
 } from "../ui.js";
 import { barHeight, loadoutScreen, perkIds } from "../buildview.js";
 import { renderMarkdown } from "../markdown.js";
@@ -55,7 +55,7 @@ export async function editorPage(ctx) {
         [button("SIGN IN WITH STEAM", { href: loginUrl(location.pathname), link: false })]));
       return;
     }
-    mount(ctx.app, loadingState());
+    showLoading(ctx.app);
     let b;
     try {
       b = await api.get(`/api/builds/${encodeURIComponent(editId)}`);

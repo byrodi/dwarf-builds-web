@@ -267,7 +267,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center;
   padding: 60px 20px; color: var(--dim); font-family: var(--f-title); font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
 }
-.state-loading { flex-direction: row; }
+/* LOADING shows only when the wait is long enough to notice. */
+.state-loading { flex-direction: row; animation: state-late 200ms 250ms backwards; }
+@keyframes state-late { from { opacity: 0; } }
+/* Old results stay under a new search (dimmed when it takes long), so the page does not jump. */
+.stale { opacity: 0.45; pointer-events: none; transition: opacity 150ms 200ms; }
 .state h2 { margin: 0; font-family: var(--f-title); font-size: 34px; color: #fff; font-weight: 700; text-transform: uppercase; }
 .state p { margin: 0; font-family: var(--f-body); font-size: 17px; font-weight: 400; letter-spacing: 0; color: var(--light); max-width: 520px; }
 .state .big-code { font-family: var(--f-num); font-size: 80px; line-height: 1; color: var(--orange); font-weight: 700; }

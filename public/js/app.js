@@ -4,12 +4,12 @@
 
 import { h, mount } from "./dom.js";
 import { api, loginUrl } from "./api.js";
-import { loadGame } from "./game.js";
-import { initTips, hideTip, closeModal, avatar, loadingState, errorState, button, confirmModal, feedback } from "./ui.js";
-import { browsePage } from "./pages/browse.js";
-import { buildPage } from "./pages/build.js";
+import { loadGame, getGame } from "./game.js";
+import { initTips, hideTip, closeModal, avatar, showLoading, errorState, button, confirmModal, feedback } from "./ui.js";
+import { browsePage, browseFirst } from "./pages/browse.js";
+import { buildPage, buildFirst } from "./pages/build.js";
 import { editorPage } from "./pages/editor.js";
-import { userPage, mePage } from "./pages/user.js";
+import { userPage, userFirst, mePage } from "./pages/user.js";
 import { notFoundPage } from "./pages/notfound.js";
 import { reportsPage } from "./pages/reports.js";
 
@@ -19,12 +19,13 @@ let renderToken = 0;
 let guard = null; // () => true when the page has unsaved changes
 let currentUrl = location.pathname + location.search;
 
+// first(params, query): the API call the page starts with, so it can be asked for before the page runs (warm()).
 const ROUTES = [
-  { re: /^\/$/, page: browsePage, nav: "browse" },
-  { re: /^\/b\/([0-9A-Za-z]{1,32})\/?$/, page: buildPage, nav: "" },
+  { re: /^\/$/, page: browsePage, nav: "browse", first: browseFirst },
+  { re: /^\/b\/([0-9A-Za-z]{1,32})\/?$/, page: buildPage, nav: "", first: buildFirst },
   { re: /^\/new\/?$/, page: editorPage, nav: "new" },
   { re: /^\/edit\/([0-9A-Za-z]{1,32})\/?$/, page: editorPage, nav: "" },
-  { re: /^\/u\/([0-9]{1,20})\/?$/, page: userPage, nav: "" },
+  { re: /^\/u\/([0-9]{1,20})\/?$/, page: userPage, nav: "", first: userFirst },
   { re: /^\/me\/?$/, page: mePage, nav: "me" },
   { re: /^\/reports\/?$/, page: reportsPage, nav: "" },
 ];
@@ -35,13 +36,17 @@ export function getMe() {
   return session.me || null;
 }
 
-async function loadMe() {
-  try {
-    session.me = await api.get("/api/me");
-  } catch {
-    session.me = null;
+// Asked once, when the script starts: in parallel with the game data, not after it.
+let meReady = null;
+
+function loadMe() {
+  if (!meReady) {
+    meReady = api.get("/api/me").catch(() => null).then((me) => {
+      session.me = me;
+      drawAccount();
+    });
   }
-  drawAccount();
+  return meReady;
 }
 
 function drawAccount() {
@@ -142,6 +147,20 @@ function isCurrent(token) {
   return token === renderToken;
 }
 
+function match(path) {
+  for (const r of ROUTES) {
+    const m = path.match(r.re);
+    if (m) return { hit: r, params: m.slice(1) };
+  }
+  return { hit: null, params: [] };
+}
+
+// Asks for the data a page starts with before the page runs: api.get() keeps the answer for it. Needs the game
+// data (the browse filters are checked against it).
+function warm(hit, params, query) {
+  if (hit && hit.first && getGame()) api.get(hit.first(params, query)).catch(() => {});
+}
+
 async function route() {
   const token = ++renderToken;
   hideTip();
@@ -149,21 +168,12 @@ async function route() {
   const note = nextNote;
   nextNote = null;
   currentUrl = location.pathname + location.search;
-  const path = location.pathname;
   const query = new URLSearchParams(location.search);
-  let hit = null;
-  let params = [];
-  for (const r of ROUTES) {
-    const m = path.match(r.re);
-    if (m) {
-      hit = r;
-      params = m.slice(1);
-      break;
-    }
-  }
+  const { hit, params } = match(location.pathname);
   setNav(navOf(hit, params));
   drawAccount();
-  mount(app, loadingState());
+  showLoading(app);
+  const me = loadMe();
   try {
     await loadGame();
   } catch {
@@ -174,7 +184,9 @@ async function route() {
   }
   if (!isCurrent(token)) return;
   if (session.me === undefined) {
-    await loadMe();
+    // The page needs the session to draw, but its data does not have to wait for it.
+    warm(hit, params, query);
+    await me;
     if (!isCurrent(token)) return;
     setNav(navOf(hit, params));
   }
@@ -205,6 +217,19 @@ document.addEventListener("click", (e) => {
   navigate(href).then((moved) => {
     if (moved) window.scrollTo(0, 0);
   });
+});
+
+// A mouse press on a link asks for that page's data at once: the click that follows finds it on its way.
+// Not for touch, where a press on a card is mostly the start of a scroll.
+document.addEventListener("pointerdown", (e) => {
+  if (e.pointerType !== "mouse" || e.button !== 0) return;
+  const a = e.target.closest ? e.target.closest("a[href]") : null;
+  if (!a || a.target || a.hasAttribute("download")) return;
+  const href = a.getAttribute("href");
+  if (!href || !href.startsWith("/") || href.startsWith("//") || href.startsWith("/api/")) return;
+  const url = new URL(href, location.origin);
+  const { hit, params } = match(url.pathname);
+  warm(hit, params, url.searchParams);
 });
 
 window.addEventListener("popstate", async () => {

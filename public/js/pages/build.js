@@ -9,19 +9,26 @@ import { parseCode } from "../shared/code.js";
 import { barHeight, loadoutScreen, perksByType } from "../buildview.js";
 import { renderMarkdown } from "../markdown.js";
 import {
-  classIcon, button, copyButton, mask, modal, confirmModal, loadingState, errorState, avatar, setLabel, hideTip,
+  classIcon, button, copyButton, mask, modal, confirmModal, showLoading, errorState, avatar, setLabel, hideTip,
   feedback, flash,
 } from "../ui.js";
 
 const REASON_MAX = 500;
 const MOD_PAGE = "https://mod.io/g/drg/m/dwarf-builds";
 
+const buildUrl = (id) => `/api/builds/${encodeURIComponent(id)}`;
+
+// The first call of the page (app.js asks for it before the page starts).
+export function buildFirst(params) {
+  return buildUrl(params[0]);
+}
+
 export async function buildPage(ctx) {
   const id = ctx.params[0];
-  mount(ctx.app, loadingState());
+  showLoading(ctx.app);
   let b;
   try {
-    b = await api.get(`/api/builds/${encodeURIComponent(id)}`);
+    b = await api.get(buildUrl(id));
   } catch (e) {
     if (!ctx.alive()) return;
     if (e.status === 404) {

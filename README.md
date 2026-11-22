@@ -22,6 +22,12 @@ Live at [dwarfbuilds.pages.dev](https://dwarfbuilds.pages.dev). The mod and the 
 Cloudflare Pages: static files in `public/` and Pages Functions in `functions/`, with the D1 database
 `dwarfbuilds-db`. No framework and no build step.
 
+Without a build step the browser would find the modules one import level at a time, so `public/index.html`
+preloads all of them and the game data (`tests/preload.test.js` keeps that list equal to the import graph).
+`public/_headers` lets the browser keep the game pictures for a week; scripts and styles are checked on every
+visit, since their names carry no version. The browser also keeps API answers for two minutes (`public/js/api.js`),
+until the next write.
+
 Game data (`public/data/` and `public/img/`) is not in git. `Tools/dwarfbuilds_export.py` in the mod repository
 reads it from an installed game and writes it here; in the mod repository this site is the `Web` submodule.
 
