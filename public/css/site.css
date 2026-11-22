@@ -159,11 +159,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
   gap: 16px; flex-wrap: wrap; color: var(--dim); font-size: 13px;
 }
 #data-version { font-family: var(--f-num); }
+/* left: the notice, the game data under it; right: the source link, the credit under it */
+.foot-l, .foot-r { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.foot-r { align-items: flex-end; }
+.gh { display: inline-flex; align-items: center; gap: 7px; color: var(--light-text); font-weight: 600; text-decoration: none; }
+.gh svg { display: block; flex: none; }
+/* both footer links: bright, and underlined on hover like any link */
+.gh:hover, .credit:hover { color: #fff; }
+.gh:hover span, .credit:hover span { text-decoration: underline; text-underline-offset: 3px; }
 /* "by rodi.": the author's mark (frontend-design brand kit, avatar-mark.svg) and the signature, period in brand pink */
 .credit { display: inline-flex; align-items: center; gap: 7px; color: var(--light-text); font-weight: 600; text-decoration: none; }
 .credit img { display: block; border-radius: 3px; }
 .credit b { color: #d78494; font-weight: 700; }
-.credit:hover { color: #fff; text-decoration: none; }
 
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
 .page-title {
@@ -1043,6 +1050,7 @@ button.gs-opt:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .account .btn.small { height: 32px; font-size: 16px; }
   .app { padding: 12px 12px 30px; }
   .foot-in { padding: 12px; }
+  .foot-r { align-items: flex-start; }
   .page-title { font-size: 32px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   .rep-row { grid-template-columns: minmax(0, 1fr); }

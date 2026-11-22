@@ -148,7 +148,7 @@ function draw(ctx, b) {
         h("div.notes-sub", { text: "Use it in game" }),
         h("ol",
           h("li", h("b", { text: "COPY CODE" }), "."),
-          h("li", "In game press ", h("span.kbd", { text: "B" }), " and open the ", h("b", { text: "BUILD CODE" }), " tab."),
+          h("li", "In game press ", h("span.kbd", { text: "B" }), " (or your key from Mod Hub) and open the ", h("b", { text: "BUILD CODE" }), " tab."),
           h("li", "Press ", h("b", { text: "PASTE FROM CLIPBOARD" }), ", then ", h("b", { text: "TAKE BUILD" }), ".")),
         h("div.label", { text: "Needs the Dwarf Builds mod" }))));
   const action = h("div.ls-actions", copyButton(() => b.code, {}));
