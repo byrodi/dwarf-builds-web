@@ -1,6 +1,6 @@
 # Dwarf Builds website
 
-Browse and share Deep Rock Galactic builds as codes for the Dwarf Builds mod.
+Browse and share Deep Rock Galactic builds as codes for the [Dwarf Builds mod](https://mod.io/g/drg/m/dwarf-builds).
 
 Live at [dwarfbuilds.pages.dev](https://dwarfbuilds.pages.dev). The mod and the game data exporter are in
 [byrodi/dwarf-builds-drg](https://github.com/byrodi/dwarf-builds-drg).
@@ -37,6 +37,7 @@ reads it from an installed game and writes it here; in the mod repository this s
 | `migrations/` | D1 schema. |
 | `scripts/check-secrets.mjs` | Secret scan of `public/` and `functions/`. |
 | `scripts/make-vectors.mjs` | Writes `tests/code_vectors.json` from the test fixture. |
+| `scripts/fetch-game-data.mjs` | Downloads the live site's game data into `public/` (the CI deploy uses it). |
 | `tests/` | `node --test` unit tests; `tests/fixtures/game.sample.json` is a small game.json. |
 
 ## API
@@ -95,6 +96,14 @@ node scripts/make-vectors.mjs   # after changing the fixture or code.js
 ```
 
 ## Deploy
+
+Every push to `main` that passes the tests is deployed to dwarfbuilds.pages.dev by GitHub Actions
+(`.github/workflows/ci.yml`, job `deploy`): D1 migrations, then `wrangler pages deploy`. The live site is this
+repository. Game data is not in git, so the job takes what the live site serves (`scripts/fetch-game-data.mjs`).
+The workflow needs the repository secrets `CLOUDFLARE_API_TOKEN` (Pages: Edit, D1: Edit) and
+`CLOUDFLARE_ACCOUNT_ID`.
+
+New game data (after a game update) goes out from a machine with the game:
 
 ```sh
 npm run deploy           # check-secrets, tests, then wrangler pages deploy --branch main

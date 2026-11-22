@@ -492,6 +492,8 @@ button[data-tip], a[data-tip] { cursor: pointer; }
 .howto ol { margin: 0; padding-left: 22px; }
 .howto li { margin: 4px 0; }
 .howto b { color: var(--orange); font-family: var(--f-title); font-size: 18px; letter-spacing: 0.02em; }
+.howto .modlink { color: var(--orange); text-decoration: underline; text-underline-offset: 3px; }
+.howto .modlink:hover { color: #fff; }
 .kbd {
   display: inline-block; min-width: 22px; padding: 0 6px; background: #fff; color: #050403; text-align: center;
   font-family: var(--f-num); font-weight: 700; font-size: 14px; line-height: 20px;

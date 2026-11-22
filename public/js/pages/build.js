@@ -14,6 +14,7 @@ import {
 } from "../ui.js";
 
 const REASON_MAX = 500;
+const MOD_PAGE = "https://mod.io/g/drg/m/dwarf-builds";
 
 export async function buildPage(ctx) {
   const id = ctx.params[0];
@@ -150,7 +151,8 @@ function draw(ctx, b) {
           h("li", h("b", { text: "COPY CODE" }), "."),
           h("li", "In game press ", h("span.kbd", { text: "B" }), " (or your key from Mod Hub) and open the ", h("b", { text: "BUILD CODE" }), " tab."),
           h("li", "Press ", h("b", { text: "PASTE FROM CLIPBOARD" }), ", then ", h("b", { text: "TAKE BUILD" }), ".")),
-        h("div.label", { text: "Needs the Dwarf Builds mod" }))));
+        h("div.label", "Needs the ", h("a.modlink", { href: MOD_PAGE, target: "_blank", rel: "noopener", text: "Dwarf Builds mod" }),
+          " from mod.io"))));
   const action = h("div.ls-actions", copyButton(() => b.code, {}));
 
   const screen = h("div.ls-host");
