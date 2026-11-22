@@ -159,6 +159,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   gap: 16px; flex-wrap: wrap; color: var(--dim); font-size: 13px;
 }
 #data-version { font-family: var(--f-num); }
+/* "by rodi.": the author's mark (frontend-design brand kit, avatar-mark.svg) and the signature, period in brand pink */
+.credit { display: inline-flex; align-items: center; gap: 7px; color: var(--light-text); font-weight: 600; text-decoration: none; }
+.credit img { display: block; border-radius: 3px; }
+.credit b { color: #d78494; font-weight: 700; }
+.credit:hover { color: #fff; text-decoration: none; }
 
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
 .page-title {
