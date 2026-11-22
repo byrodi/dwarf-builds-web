@@ -10,6 +10,7 @@ import { barHeight, loadoutScreen, perksByType } from "../buildview.js";
 import { renderMarkdown } from "../markdown.js";
 import {
   classIcon, button, copyButton, mask, modal, confirmModal, loadingState, errorState, avatar, setLabel, hideTip,
+  feedback, flash,
 } from "../ui.js";
 
 const REASON_MAX = 500;
@@ -49,7 +50,9 @@ function draw(ctx, b) {
     h("span", { text: formatDate(b.createdAt) + (b.updatedAt && b.updatedAt - b.createdAt > 60000 ? `, edited ${formatDate(b.updatedAt)}` : "") }),
     h("span.likes", mask(null, null, "arrow"), likeCount));
 
-  const actions = h("div.ls-topbtns");
+  // A refused action (like, hide, delete) is answered in a line under these buttons.
+  const actMsg = feedback("under");
+  const actions = h("div.ls-topbtns", actMsg);
   const likeBtn = button(b.liked ? "LIKED" : "LIKE", { kind: "sec", size: "small", on: b.liked });
   likeBtn.classList.add("like-btn");
   likeBtn.querySelector("span").insertBefore(mask(null, null, "arrow"), likeBtn.querySelector(".lbl"));
@@ -59,6 +62,7 @@ function draw(ctx, b) {
       return;
     }
     likeBtn.disabled = true;
+    actMsg.clear();
     try {
       const r = await api.post(`/api/builds/${b.id}/like`, {});
       b.liked = r.liked;
@@ -67,11 +71,12 @@ function draw(ctx, b) {
       setLabel(likeBtn, r.liked ? "LIKED" : "LIKE");
       likeBtn.classList.toggle("on", r.liked);
     } catch (e) {
-      ctx.notice(errorText(e));
+      actMsg.say(errorText(e));
     }
     likeBtn.disabled = false;
   });
-  actions.appendChild(likeBtn);
+  // Your own build cannot be liked (the server refuses it too): no button, the count stays in the line above.
+  if (!(me && author.steamId === me.steamId)) actions.appendChild(likeBtn);
   actions.appendChild(button("OPEN IN EDITOR", { kind: "sec", size: "small", href: `/new?code=${encodeURIComponent(b.code)}`, title: "Start a new build from this one" }));
   if (b.canEdit) actions.appendChild(button("EDIT", { size: "small", href: `/edit/${b.id}` }));
   if (b.canHide) {
@@ -83,7 +88,7 @@ function draw(ctx, b) {
           b.hidden = !b.hidden;
           draw(ctx, b);
         } catch (e) {
-          ctx.notice(errorText(e));
+          actMsg.say(errorText(e));
         }
       },
     }));
@@ -96,19 +101,19 @@ function draw(ctx, b) {
         if (!ok) return;
         try {
           await api.del(`/api/builds/${b.id}`);
-          ctx.notice("Build deleted.", true);
-          ctx.navigate("/me", { replace: true });
+          ctx.navigate(me ? `/u/${me.steamId}` : "/", { replace: true, note: { text: "Build deleted.", ok: true } });
         } catch (e) {
-          ctx.notice(errorText(e));
+          actMsg.say(errorText(e));
         }
       },
     }));
   }
   if (!b.canEdit) {
-    actions.appendChild(h("button.link-btn.dim", {
+    const reportBtn = h("button.link-btn.dim", {
       type: "button", text: "REPORT",
-      onclick: () => (me ? report(ctx, b) : (location.href = loginUrl(location.pathname))),
-    }));
+      onclick: () => (me ? report(b, reportBtn) : (location.href = loginUrl(location.pathname))),
+    });
+    actions.appendChild(reportBtn);
   }
 
   const top = h("div.ls-top.bt",
@@ -120,6 +125,9 @@ function draw(ctx, b) {
     actions);
 
   const msgs = h("div.ls-msgs");
+  // The result of the action that led here ("Build published"), shown once.
+  if (ctx.note) msgs.appendChild(h("div.msg.flash-msg" + (ctx.note.ok ? ".ok" : ".err"), { role: "status", text: ctx.note.text }));
+  ctx.note = null;
   if (b.hidden) msgs.appendChild(h("div.msg.err", { text: "This build is hidden. Only you and admins can see it." }));
   if (b.rebuilt) {
     msgs.appendChild(h("div.msg",
@@ -167,7 +175,9 @@ function draw(ctx, b) {
   redraw();
 }
 
-async function report(ctx, b) {
+// The dialog stays open until the report is sent: a refusal is answered under the field. After that the
+// REPORT link itself says it was sent.
+async function report(b, reportBtn) {
   const ta = h("textarea.textarea", { maxlength: String(REASON_MAX * 2), placeholder: "What is wrong with this build?", style: { "min-height": "110px" } });
   const count = h("span.count", { text: `0 / ${REASON_MAX}` });
   ta.addEventListener("input", () => {
@@ -175,21 +185,31 @@ async function report(ctx, b) {
     count.textContent = `${n} / ${REASON_MAX}`;
     count.classList.toggle("over", n > REASON_MAX);
   });
+  const msg = feedback("line");
   const v = await modal({
     title: "REPORT BUILD",
-    body: h("div.field", h("div.field-head", h("span.label", { text: "Reason" }), count), ta),
+    body: h("div.field", h("div.field-head", h("span.label", { text: "Reason" }), count), ta, msg),
     buttons: [{ label: "CANCEL", kind: "sec", value: null }, { label: "SEND REPORT", value: "send" }],
+    check: async () => {
+      const reason = ta.value.trim();
+      const problem = !reason ? "Write a reason to report a build."
+        : textLength(reason) > REASON_MAX ? `The reason is longer than ${REASON_MAX} characters.` : "";
+      if (problem) {
+        msg.say(problem);
+        flash(ta);
+        ta.focus();
+        return false;
+      }
+      try {
+        await api.post(`/api/builds/${b.id}/report`, { reason });
+        return true;
+      } catch (e) {
+        msg.say(errorText(e));
+        return false;
+      }
+    },
   });
   if (v !== "send") return;
-  const reason = ta.value.trim();
-  if (!reason || textLength(reason) > REASON_MAX) {
-    ctx.notice(reason ? `The reason is longer than ${REASON_MAX} characters.` : "Write a reason to report a build.");
-    return;
-  }
-  try {
-    await api.post(`/api/builds/${b.id}/report`, { reason });
-    ctx.notice("Thanks, the report was sent.", true);
-  } catch (e) {
-    ctx.notice(errorText(e));
-  }
+  reportBtn.textContent = "REPORT SENT";
+  reportBtn.disabled = true;
 }

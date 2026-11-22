@@ -1,7 +1,7 @@
 // Shared widgets: tinted icons, upgrade hexagons, overclock and perk tiles, game-like tooltips,
 // buttons, modals, clipboard.
 
-import { h, clear, append } from "./dom.js";
+import { h, clear, append, mount } from "./dom.js";
 import { getGame, maskUrl, classColourVar, ocFrame } from "./game.js";
 
 // ---------------------------------------------------------------- icons
@@ -217,10 +217,35 @@ export function setLabel(btn, label) {
   if (l) l.textContent = label;
 }
 
+// ---------------------------------------------------------------- feedback in place
+
+// A message line that stays next to the control it answers: no pop-ups. Every say() makes a new line, so
+// its highlight runs again and screen readers announce it again, even when the text is the same.
+// Kinds (CSS): "one" a reserved single line in a row, "line" a reserved line under a field,
+// "above" / "under" a line pinned to the edge of a button group.
+export function feedback(kind = "") {
+  const slot = h("div.fb" + (kind ? "." + kind : ""));
+  slot.say = (content, ok = false) => {
+    mount(slot, content
+      ? h("div.fb-line" + (ok ? ".ok" : ""), { role: ok ? "status" : "alert", title: typeof content === "string" ? content : null }, content)
+      : null);
+  };
+  slot.clear = () => mount(slot);
+  return slot;
+}
+
+// Highlights a field again (each wrong attempt signals, also the second one).
+export function flash(el) {
+  el.classList.remove("flash");
+  void el.offsetWidth;
+  el.classList.add("flash");
+}
+
 let openModal = null;
 
-// Simple modal. Returns a promise of the button value (or null when closed).
-export function modal({ title, body, buttons, wide = false }) {
+// Simple modal. Returns a promise of the button value (or null when closed). check(value) can refuse a
+// button (false, or a promise of false): the modal stays open, so the answer shows inside it.
+export function modal({ title, body, buttons, wide = false, check = null }) {
   if (openModal) openModal(null);
   return new Promise((resolve) => {
     let done = false;
@@ -236,10 +261,25 @@ export function modal({ title, body, buttons, wide = false }) {
     const onKey = (e) => {
       if (e.key === "Escape") close(null);
     };
+    let checking = false;
+    const press = async (value) => {
+      if (check && value !== null && value !== false) {
+        if (checking) return;
+        checking = true;
+        let ok = false;
+        try {
+          ok = await check(value);
+        } finally {
+          checking = false;
+        }
+        if (!ok) return;
+      }
+      close(value);
+    };
     const box = h("div.modal" + (wide ? ".wide" : ""), { role: "dialog", "aria-modal": "true" },
       h("h3", { text: title }),
       body,
-      h("div.actions", buttons.map((b) => button(b.label, { kind: b.kind, size: "small", onclick: () => close(b.value) }))));
+      h("div.actions", buttons.map((b) => button(b.label, { kind: b.kind, size: "small", onclick: () => press(b.value) }))));
     back.appendChild(box);
     back.addEventListener("mousedown", (e) => {
       if (e.target === back) close(null);

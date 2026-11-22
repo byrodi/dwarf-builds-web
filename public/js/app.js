@@ -5,7 +5,7 @@
 import { h, mount } from "./dom.js";
 import { api, loginUrl } from "./api.js";
 import { loadGame } from "./game.js";
-import { initTips, hideTip, closeModal, avatar, loadingState, errorState, button, confirmModal } from "./ui.js";
+import { initTips, hideTip, closeModal, avatar, loadingState, errorState, button, confirmModal, feedback } from "./ui.js";
 import { browsePage } from "./pages/browse.js";
 import { buildPage } from "./pages/build.js";
 import { editorPage } from "./pages/editor.js";
@@ -54,7 +54,7 @@ function drawAccount() {
       title: "Sign in through Steam",
     });
     b.querySelector(".lbl").appendChild(h("span.wide-text", { text: " WITH STEAM" }));
-    return mount(box, b);
+    return mount(box, b, signInMsg);
   }
   const menu = h("div.menu", { hidden: true, role: "menu" },
     h("a", { href: `/u/${me.steamId}`, "data-link": "", text: "MY BUILDS" }),
@@ -103,34 +103,25 @@ function navOf(hit, params) {
   return hit.nav;
 }
 
-// ---------------------------------------------------------------- notices
+// ---------------------------------------------------------------- messages
 
-let noticeAt = 0;
-
-export function notice(text, ok = false) {
-  const bar = document.getElementById("notice");
-  noticeAt = Date.now();
-  if (!text) {
-    bar.hidden = true;
-    return;
-  }
-  mount(bar, h("span", { text }), h("button.link-btn.dim", { type: "button", text: "DISMISS", onclick: () => { bar.hidden = true; } }));
-  bar.classList.toggle("ok", ok);
-  bar.hidden = false;
-  const at = noticeAt;
-  setTimeout(() => {
-    if (noticeAt === at) bar.hidden = true;
-  }, ok ? 5000 : 9000);
-}
+// No pop-ups: a message stays next to the control it answers (ui.js feedback()).
+// A failed Steam sign-in is answered under the SIGN IN button, until the next page.
+const signInMsg = feedback("under");
+// The result of an action that ends on another page ("Build published"): navigate(url, { note }) hands
+// { text, ok } to that page as ctx.note, and the page shows it in its own message area.
+let nextNote = null;
 
 // ---------------------------------------------------------------- router
 
-export async function navigate(url, { replace = false } = {}) {
+export async function navigate(url, { replace = false, note = null } = {}) {
   if (guard && guard()) {
     const leave = await confirmModal("LEAVE THIS PAGE?", "You have unsaved changes. They will be lost.", "LEAVE", "danger");
     if (!leave) return false;
   }
   guard = null;
+  nextNote = note;
+  signInMsg.clear();
   if (replace) history.replaceState(null, "", url);
   else history.pushState(null, "", url);
   route();
@@ -152,8 +143,8 @@ async function route() {
   const token = ++renderToken;
   hideTip();
   closeModal();
-  // A notice set just before this navigation (e.g. "Build published") stays; older ones go.
-  if (Date.now() - noticeAt > 1500) document.getElementById("notice").hidden = true;
+  const note = nextNote;
+  nextNote = null;
   currentUrl = location.pathname + location.search;
   const path = location.pathname;
   const query = new URLSearchParams(location.search);
@@ -187,7 +178,7 @@ async function route() {
   const ctx = {
     app, params, query, me: session.me || null, token,
     alive: () => isCurrent(token),
-    navigate, setGuard, notice, replaceQuery,
+    navigate, setGuard, note, replaceQuery,
   };
   try {
     await (hit ? hit.page(ctx) : notFoundPage(ctx));
@@ -242,7 +233,7 @@ loadGame().then((g) => {
 
 const q = new URLSearchParams(location.search);
 if (q.get("signin") === "failed") {
-  notice("Steam sign-in failed. Please try again.");
+  signInMsg.say("Steam sign-in failed. Please try again.");
   q.delete("signin");
   const s = q.toString();
   history.replaceState(null, "", location.pathname + (s ? "?" + s : ""));

@@ -12,21 +12,21 @@ const WEB = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const game = JSON.parse(fs.readFileSync(path.join(WEB, "tests/fixtures/game.sample.json"), "utf8"));
 
 const cases = [
-  ["full Driller build", "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:2.3.5.4.8.34"],
-  ["full Scout build", "DB1:S:2-21221-3:1-12213-1:1-2122-0:1-212-0:1-3113-0:2--0:3.7.13.17.22.36"],
-  ["primary only", "DB1:S:1-00000-0:0--0:0--0:0--0:0--0:0--0:"],
-  ["grenade only", "DB1:D:0--0:0--0:0--0:0--0:0--0:1--0:"],
-  ["partial tiers, no OC", "DB1:D:2-10200-0:1-00003-2:0--0:0--0:0--0:0--0:"],
-  ["proficiency only", "DB1:S:1-11111-0:0--0:0--0:0--0:0--0:0--0:35"],
-  ["two passive, one active", "DB1:D:1-22222-1:0--0:0--0:0--0:0--0:0--0:2.3.1"],
+  ["full Driller build", "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:2.3.5.4.8.34"],
+  ["full Scout build", "DB1:S:2-21221-3:1-12213-1:1-2122-0:1-212-0:1-3113-0:2--0:1-12-0:3.7.13.17.22.36"],
+  ["primary only", "DB1:S:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:"],
+  ["grenade only", "DB1:D:0--0:0--0:0--0:0--0:0--0:1--0:0--0:"],
+  ["partial tiers, no OC", "DB1:D:2-10200-0:1-00003-2:0--0:0--0:0--0:0--0:0--0:"],
+  ["proficiency only", "DB1:S:1-11111-0:0--0:0--0:0--0:0--0:0--0:0--0:35"],
+  ["two passive, one active", "DB1:D:1-22222-1:0--0:0--0:0--0:0--0:0--0:0--0:2.3.1"],
 ];
 
 const nonCanonical = [
-  ["perks out of order", "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:34.4.2.8.3.5"],
-  ["extra tier digits and extra parts", "DB1:D:1-213219-4-7:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3-5-0:2.3.5.4.8.34:EXTRA:9"],
+  ["perks out of order", "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:34.4.2.8.3.5"],
+  ["extra tier digits and extra parts", "DB1:D:1-213219-4-7:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3-5-0:1-125-0-3:2.3.5.4.8.34:EXTRA:9"],
   ["missing tier digits and parts", "DB1:S:2-21-3:1"],
-  ["lower case and spaces", "  db1:s:2-21221-3:1-12213-1:0--0:0--0:0--0:0--0:3.7  "],
-  ["empty fields", "DB1:D:1::::::"],
+  ["lower case and spaces", "  db1:s:2-21221-3:1-12213-1:0--0:0--0:0--0:0--0:0--0:3.7  "],
+  ["empty fields", "DB1:D:1:::::::"],
 ];
 
 const out = [];

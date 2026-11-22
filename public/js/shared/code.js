@@ -1,13 +1,13 @@
-// Dwarf Builds build code DB2 (see Docs/dwarfbuilds-site.md, section 1).
+// Dwarf Builds build code DB1 (see Docs/dwarfbuilds-site.md, section 1).
 // Isomorphic ES module: used by the browser and by Pages Functions. No dependencies.
 //
-//   DB2:<class>:<p0>:<p1>:<p2>:<p3>:<p4>:<p5>:<p6>:<perks>
+//   DB1:<class>:<p0>:<p1>:<p2>:<p3>:<p4>:<p5>:<p6>:<perks>
 //   p = <item>-<tiers>-<oc>, perks = ids joined with "."
 //
 // A build object is { class: "D", slots: [{ item, tiers: [..], oc } x7], perks: [ids] }.
 // Readers ignore extra parts/digits and treat missing ones as 0.
 
-export const PREFIX = "DB2";
+export const PREFIX = "DB1";
 export const CLASS_LETTERS = ["D", "E", "G", "S"];
 export const SLOT_KEYS = ["primary", "secondary", "traversal", "tool", "armor", "grenade", "pickaxe"];
 export const PERK_TYPES = ["passive", "active", "proficiency"];

@@ -7,7 +7,7 @@ import { ogTags, escapeHtml, onRequestGet as ogHandler } from "../functions/b/[i
 import { clearGameDataCache } from "../functions/_lib/gamedata.js";
 
 const game = JSON.parse(fs.readFileSync(new URL("./fixtures/game.sample.json", import.meta.url), "utf8"));
-const CODE = "DB2:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:2.3.5.4.8.34";
+const CODE = "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:2.3.5.4.8.34";
 
 test("csrf guard", () => {
   const mk = (h) => new Request("https://dwarfbuilds.pages.dev/api/builds", { method: "POST", headers: h });
@@ -108,7 +108,7 @@ test("current code is rebuilt after a data update", () => {
   d.slots.primary.forEach((it, i) => (it.index = i + 1));
   const cur = currentCode(row, g2);
   assert.equal(cur.rebuilt, true);
-  assert.match(cur.code, /^DB2:D:2-21321-4:/);
+  assert.match(cur.code, /^DB1:D:2-21321-4:/);
 });
 
 test("open graph tags are escaped", () => {

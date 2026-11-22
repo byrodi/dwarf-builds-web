@@ -16,7 +16,7 @@ function seed(db, { builds = 0 } = {}) {
   db.raw.prepare("INSERT INTO users (steam_id, name, avatar, created_at, updated_at, banned) VALUES (?, 'b', NULL, 0, 0, 1)").run(B);
   const ins = db.raw.prepare(
     `INSERT INTO builds (id, user_id, class, title, description, code, build_json, likes, hidden, created_at, updated_at)
-     VALUES (?, ?, 'D', 't', '', 'DB2:D:1--0:0--0:0--0:0--0:0--0:0--0:0--0:', '{}', 0, 0, ?, ?)`
+     VALUES (?, ?, 'D', 't', '', 'DB1:D:1--0:0--0:0--0:0--0:0--0:0--0:0--0:', '{}', 0, 0, ?, ?)`
   );
   for (let i = 0; i < builds; i++) ins.run(`b${String(i).padStart(7, "0")}`, A, i, i);
 }

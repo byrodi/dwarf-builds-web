@@ -15,6 +15,17 @@ export const REPORTS_PER_DAY = 30;
 // All writes of one user per UTC day (create, edit, like toggle, report): keeps one account from
 // using up the D1 free-plan row writes for everyone.
 export const WRITES_PER_DAY = 500;
+// HOT rank: log10(likes + 1) + the build's age in units of HOT_DAYS, so a build HOT_DAYS newer needs ten times
+// fewer likes to rank the same and old builds do not stay on top for ever. It changes only with the likes, so it
+// is stored in builds.hot (indexed) when a build is made and when it is liked or unliked.
+export const HOT_DAYS = 7;
+// TOP periods: days of likes that count ("all": every like).
+export const TOP_PERIODS = { week: 7, month: 30, all: 0 };
+export const TOP_CACHE_SECONDS = 300;
+
+export function hotScore(likes, createdAt) {
+  return Math.log10(Math.max(0, Number(likes) || 0) + 1) + Number(createdAt) / (HOT_DAYS * 86400000);
+}
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 

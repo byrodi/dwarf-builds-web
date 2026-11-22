@@ -1,4 +1,5 @@
-// "/" browse: class tabs, weapon and overclock filters, sort NEW / TOP, title search, paged cards.
+// "/" browse: class tabs, weapon and overclock filters, sort HOT / NEW / TOP (of a week, a month, all time),
+// title search, paged cards.
 
 import { h, mount } from "../dom.js";
 import { api, errorText } from "../api.js";
@@ -7,6 +8,9 @@ import { classIcon, itemPic, ocIcon, ocTip, setTip, button, loadingState, errorS
 import { cardGrid, pager } from "../cards.js";
 
 const WEAPON_SLOTS = ["primary", "secondary"];
+
+const SORTS = ["hot", "new", "top"];
+const PERIODS = [["week", "THIS WEEK"], ["month", "THIS MONTH"], ["all", "ALL TIME"]];
 
 export async function browsePage(ctx) {
   const g = getGame();
@@ -21,7 +25,8 @@ export async function browsePage(ctx) {
     cls: classByKey(q.get("class")),
     item: q.get("item") || "",
     oc: q.get("oc") || "",
-    sort: q.get("sort") === "top" ? "top" : "new",
+    sort: SORTS.includes(q.get("sort")) ? q.get("sort") : "hot",
+    period: PERIODS.some((p) => p[0] === q.get("period")) ? q.get("period") : "month",
     q: (q.get("q") || "").slice(0, 60),
     page: Math.max(1, parseInt(q.get("page") || "1", 10) || 1),
   };
@@ -37,8 +42,20 @@ export async function browsePage(ctx) {
   const tabs = h("div.tabs");
   const search = h("input.input.search", { type: "search", placeholder: "Search titles", maxlength: "60", "aria-label": "Search titles" });
   search.value = st.q;
-  const sortNew = button("NEW", { kind: "sec", size: "small", onclick: () => setSort("new") });
-  const sortTop = button("TOP", { kind: "sec", size: "small", onclick: () => setSort("top") });
+  const sortBtns = {
+    hot: button("HOT", { kind: "sec", size: "small", title: "Liked builds, newer ones first", onclick: () => setSort("hot") }),
+    new: button("NEW", { kind: "sec", size: "small", title: "Newest first", onclick: () => setSort("new") }),
+    top: button("TOP", { kind: "sec", size: "small", title: "Most likes in the period", onclick: () => setSort("top") }),
+  };
+  // The period of TOP. Always in the row (greyed out for HOT and NEW), so picking TOP moves nothing.
+  const periodPick = h("select.select.period", { "aria-label": "Period of TOP" },
+    PERIODS.map(([value, label]) => h("option", { value, text: label })));
+  periodPick.value = st.period;
+  periodPick.addEventListener("change", () => {
+    st.period = periodPick.value;
+    st.page = 1;
+    load();
+  });
 
   // A filter button of fixed width (the row never moves) that opens a panel of pictures under it.
   const pickers = [];
@@ -123,7 +140,8 @@ export async function browsePage(ctx) {
     if (st.cls) p.set("class", st.cls.key);
     if (st.item) p.set("item", st.item);
     if (st.oc) p.set("oc", st.oc);
-    if (st.sort !== "new") p.set("sort", st.sort);
+    if (st.sort !== "hot") p.set("sort", st.sort);
+    if (st.sort === "top" && st.period !== "month") p.set("period", st.period);
     if (st.q) p.set("q", st.q);
     if (st.page > 1) p.set("page", String(st.page));
     ctx.replaceQuery(p.toString());
@@ -142,8 +160,8 @@ export async function browsePage(ctx) {
   }
 
   function drawSort() {
-    sortNew.classList.toggle("on", st.sort === "new");
-    sortTop.classList.toggle("on", st.sort === "top");
+    for (const s of SORTS) sortBtns[s].classList.toggle("on", st.sort === s);
+    periodPick.disabled = st.sort !== "top";
   }
 
   function setClass(c) {
@@ -214,6 +232,7 @@ export async function browsePage(ctx) {
     const mine = ++seq;
     mount(results, loadingState());
     const p = new URLSearchParams({ sort: st.sort, page: String(st.page) });
+    if (st.sort === "top") p.set("period", st.period);
     if (st.cls) p.set("class", st.cls.letter);
     if (st.item) p.set("item", st.item);
     if (st.oc) p.set("oc", st.oc);
@@ -227,6 +246,12 @@ export async function browsePage(ctx) {
       return;
     }
     if (mine !== seq || !ctx.alive()) return;
+    if (!data.builds.length && st.sort === "top" && st.period !== "all" && st.page === 1) {
+      // TOP of a period lists only builds liked in it.
+      mount(results, errorState("NO LIKES IN THIS PERIOD", "No build that matches got a like in this period yet.",
+        [button("ALL TIME", { kind: "sec", onclick: () => { st.period = "all"; periodPick.value = "all"; load(); } })]));
+      return;
+    }
     if (!data.builds.length) {
       const filtered = st.cls || st.item || st.oc || st.q;
       mount(results, errorState(st.page > 1 ? "NO MORE BUILDS" : "NO BUILDS FOUND",
@@ -264,7 +289,7 @@ export async function browsePage(ctx) {
         h("div.page-sub", { text: "Copy a code, press B in game" })),
       button("NEW BUILD", { href: "/new" })),
     tabs,
-    h("div.filters", weaponPick.wrap, ocPick.wrap, h("div.sortbox", sortNew, sortTop), search),
+    h("div.filters", weaponPick.wrap, ocPick.wrap, h("div.sortbox", SORTS.map((s) => sortBtns[s]), periodPick), search),
     results);
   document.title = "Dwarf Builds";
   await load();

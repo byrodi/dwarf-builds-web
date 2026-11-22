@@ -15,7 +15,7 @@ import {
 
 const game = JSON.parse(fs.readFileSync(new URL("./fixtures/game.sample.json", import.meta.url), "utf8"));
 const vectors = JSON.parse(fs.readFileSync(new URL("./code_vectors.json", import.meta.url), "utf8"));
-const FULL = "DB2:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:2.3.5.4.8.34";
+const FULL = "DB1:D:1-21321-4:2-12213-0:1-3112-0:1-2121-0:1-2112-0:3--0:1-12-0:2.3.5.4.8.34";
 const clone = (x) => JSON.parse(JSON.stringify(x));
 
 test("parse a full code", () => {
@@ -30,27 +30,27 @@ test("parse a full code", () => {
 
 test("encode(parse(code)) round trip", () => {
   assert.equal(encodeCode(parseCode(FULL)), FULL);
-  assert.equal(encodeCode(parseCode("DB2:S:1-0-0:0--0:0--0:0--0:0--0:0--0:0--0:")), "DB2:S:1-0-0:0--0:0--0:0--0:0--0:0--0:0--0:");
+  assert.equal(encodeCode(parseCode("DB1:S:1-0-0:0--0:0--0:0--0:0--0:0--0:0--0:")), "DB1:S:1-0-0:0--0:0--0:0--0:0--0:0--0:0--0:");
 });
 
 test("doc example parses", () => {
-  const b = parseCode("DB2:S:2-21321-4:1-12213-0:1-3122-0:1-213-0:2-2132-0:3--0:1-13-0:12.7.21.15.36");
+  const b = parseCode("DB1:S:2-21321-4:1-12213-0:1-3122-0:1-213-0:2-2132-0:3--0:1-13-0:12.7.21.15.36");
   assert.equal(b.class, "S");
   assert.deepEqual(b.perks, [12, 7, 21, 15, 36]);
 });
 
 test("missing parts are 0, extra parts and digits are ignored", () => {
-  const b = parseCode("DB2:S:2-21-3:1");
+  const b = parseCode("DB1:S:2-21-3:1");
   assert.deepEqual(b.slots[0], { item: 2, tiers: [2, 1], oc: 3 });
   assert.deepEqual(b.slots[1], { item: 1, tiers: [], oc: 0 });
   assert.deepEqual(b.slots[2], { item: 0, tiers: [], oc: 0 });
   assert.deepEqual(b.perks, []);
   const v = validateBuild(b, game);
   assert.ok(v.ok, v.errors.join());
-  assert.equal(v.canonical, "DB2:S:2-21000-3:1-00000-0:0--0:0--0:0--0:0--0:0--0:");
-  const x = validateBuild("DB2:D:1-213219-4-7:0--0:0--0:0--0:0--0:3-5-0:0--0::EXTRA:9", game);
+  assert.equal(v.canonical, "DB1:S:2-21000-3:1-00000-0:0--0:0--0:0--0:0--0:0--0:");
+  const x = validateBuild("DB1:D:1-213219-4-7:0--0:0--0:0--0:0--0:3-5-0:0--0::EXTRA:9", game);
   assert.ok(x.ok, x.errors.join());
-  assert.equal(x.canonical, "DB2:D:1-21321-4:0--0:0--0:0--0:0--0:3--0:0--0:");
+  assert.equal(x.canonical, "DB1:D:1-21321-4:0--0:0--0:0--0:0--0:3--0:0--0:");
 });
 
 test("malformed codes are rejected", () => {
@@ -59,56 +59,56 @@ test("malformed codes are rejected", () => {
     undefined,
     42,
     "",
-    "DB2",
-    "DB2:",
-    "DB2:X:1-1-1",
-    "DB1:D:1-1-1",
+    "DB1",
+    "DB1:",
+    "DB1:X:1-1-1",
+    "DB2:D:1-1-1",
     "TB1:D:1-1-1",
-    "DB2:D:0--0:0--0:0--0:0--0:0--0:0--0:0--0:1.2",
-    "DB2:D",
-    "DB2:D:1-1-1:<script>",
-    "DB2:D:1-1-1 extra words",
-    "DB2:D:" + "1".repeat(500),
-    "DB2:D:1-١-1",
+    "DB1:D:0--0:0--0:0--0:0--0:0--0:0--0:0--0:1.2",
+    "DB1:D",
+    "DB1:D:1-1-1:<script>",
+    "DB1:D:1-1-1 extra words",
+    "DB1:D:" + "1".repeat(500),
+    "DB1:D:1-١-1",
   ]) {
     assert.equal(parseCode(bad), null, String(bad));
     assert.equal(typeof codeProblem(bad), "string", String(bad));
   }
   assert.equal(codeProblem(FULL), null);
-  assert.match(validateBuild("DB2:X:1-1-1", game).errors[0], /unknown class "X"/);
-  assert.match(validateBuild("TB1:D:1-1-1", game).errors[0], /must start with DB2/);
+  assert.match(validateBuild("DB1:X:1-1-1", game).errors[0], /unknown class "X"/);
+  assert.match(validateBuild("TB1:D:1-1-1", game).errors[0], /must start with DB1/);
 });
 
 test("lower case and whitespace are accepted", () => {
-  assert.equal(validateBuild("  db2:d:1-21321-4:0--0:0--0:0--0:0--0:0--0:0--0:  ", game).canonical, "DB2:D:1-21321-4:0--0:0--0:0--0:0--0:0--0:0--0:");
+  assert.equal(validateBuild("  db1:d:1-21321-4:0--0:0--0:0--0:0--0:0--0:0--0:  ", game).canonical, "DB1:D:1-21321-4:0--0:0--0:0--0:0--0:0--0:0--0:");
 });
 
 test("non-numeric fields read as 0", () => {
-  const b = parseCode("DB2:D:1-2A1-X:B--0");
+  const b = parseCode("DB1:D:1-2A1-X:B--0");
   assert.deepEqual(b.slots[0], { item: 1, tiers: [2, 0, 1], oc: 0 });
   assert.equal(b.slots[1].item, 0);
 });
 
 test("validate: out of range item, tier, overclock", () => {
-  let v = validateBuild("DB2:D:9-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game);
+  let v = validateBuild("DB1:D:9-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game);
   assert.equal(v.ok, false);
-  v = validateBuild("DB2:D:1-90000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game);
+  v = validateBuild("DB1:D:1-90000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game);
   assert.equal(v.ok, false);
   assert.match(v.errors.join(), /tier 1 has no option 9/);
-  v = validateBuild("DB2:D:1-30000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game); // FlameThrower tier 1 has 2 options
+  v = validateBuild("DB1:D:1-30000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game); // FlameThrower tier 1 has 2 options
   assert.equal(v.ok, false);
-  v = validateBuild("DB2:D:1-00000-99:0--0:0--0:0--0:0--0:0--0:0--0:", game);
+  v = validateBuild("DB1:D:1-00000-99:0--0:0--0:0--0:0--0:0--0:0--0:", game);
   assert.equal(v.ok, false);
   assert.match(v.errors.join(), /no overclock 99/);
-  v = validateBuild("DB2:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:1-14-0:", game); // pickaxe tier 2 has 3 options
+  v = validateBuild("DB1:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:1-14-0:", game); // pickaxe tier 2 has 3 options
   assert.equal(v.ok, false);
   assert.match(v.errors.join(), /pickaxe: tier 2 has no option 4/);
-  v = validateBuild("DB2:E:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game); // class not in the fixture
+  v = validateBuild("DB1:E:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game); // class not in the fixture
   assert.equal(v.ok, false);
 });
 
 test("validate: perk rules", () => {
-  const base = "DB2:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:";
+  const base = "DB1:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:";
   const ok = (p) => validateBuild(base + p, game);
   assert.ok(ok("2.3.5.4.8.34").ok);
   assert.equal(ok("2.3.5.6").ok, false, "4 passive");
@@ -132,7 +132,7 @@ test("validate: buildJson has stable names", () => {
   assert.match(p.oc, /^OC_/);
   assert.equal(v.buildJson.slots.grenade.tiers.length, 0);
   assert.deepEqual(v.buildJson.slots.pickaxe, { item: "PickAxe_Driller", tiers: ["UPG_Pickaxe_Driller_A_PowerAttack", "UPG_Pickaxe_Driller_B_RadiusPA"], oc: null });
-  const empty = validateBuild("DB2:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game).buildJson;
+  const empty = validateBuild("DB1:D:1-00000-0:0--0:0--0:0--0:0--0:0--0:0--0:", game).buildJson;
   assert.equal(empty.slots.secondary, null);
   assert.deepEqual(empty.slots.primary.tiers, [null, null, null, null, null]);
   assert.equal(empty.slots.primary.oc, null);

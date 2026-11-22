@@ -2,14 +2,14 @@
 // modification screen with item tabs, tier choices and overclocks), perk column (click on a slot: the
 // perk panel next to it; 3 passive, 2 active, 1 proficiency); title; IMPORT CODE; live code; the
 // description under the screen; PUBLISH.
-// "/new?code=DB2:..." starts from that code (the mod's PUBLISH MY BUILD opens this).
+// "/new?code=DB1:..." starts from that code (the mod's PUBLISH MY BUILD opens this).
 
 import { h, mount, textLength } from "../dom.js";
 import { api, errorText, loginUrl } from "../api.js";
 import { getGame, classByLetter, itemsOf, itemAt, perkById, PERK_TYPES } from "../game.js";
 import { parseCode, validateBuild, encodeCode, PREFIX } from "../shared/code.js";
 import {
-  classIcon, button, copyButton, modal, confirmModal, loadingState, errorState, hideTip, setLabel,
+  classIcon, button, copyButton, modal, confirmModal, loadingState, errorState, hideTip, setLabel, feedback, flash,
 } from "../ui.js";
 import { barHeight, loadoutScreen, perkIds } from "../buildview.js";
 import { renderMarkdown } from "../markdown.js";
@@ -161,7 +161,11 @@ function editor(ctx, editId, start, startNotes) {
   descInput.value = st.description;
   const codeBox = h("div.ls-code");
   const codeMsg = h("div");
-  const publishMsg = h("div");
+  const importMsg = h("div");
+  // Answers stay where the action is: at the title, at the description, above the main button.
+  const titleMsg = feedback("one");
+  const descMsg = feedback("one");
+  const actMsg = feedback("above");
   const topIcon = h("span.ls-clsicon");
   const screen = h("div.ls-host");
   const copyBtn = copyButton(() => current().canonical || "", { kind: "sec", size: "small" });
@@ -182,10 +186,22 @@ function editor(ctx, editId, start, startNotes) {
   // ---- import
   function openImport() {
     const input = h("input.input.code-input", { type: "text", placeholder: PREFIX + ":...", spellcheck: "false", autocomplete: "off", "aria-label": "Build code" });
+    const msg = feedback("line");
     const p = modal({
       title: "Import code",
-      body: h("div.field", h("p", { text: "Paste a build code (from the mod or from another build)." }), input),
+      body: h("div.field", h("p", { text: "Paste a build code (from the mod or from another build)." }), input, msg),
       buttons: [{ label: "CANCEL", kind: "sec", value: null }, { label: "IMPORT", value: "go" }],
+      // A refused code is answered under the field and the dialog stays open.
+      check: () => {
+        const code = input.value.trim();
+        const problem = !code ? "Paste a build code first."
+          : !parseCode(code) ? `This is not a valid build code (it starts with ${PREFIX}:).` : "";
+        if (!problem) return true;
+        msg.say(problem);
+        flash(input);
+        input.focus();
+        return false;
+      },
     });
     input.addEventListener("keydown", (e) => {
       if (e.key !== "Enter") return;
@@ -201,30 +217,33 @@ function editor(ctx, editId, start, startNotes) {
     });
   }
 
+  let importTimer = 0;
   async function doImport(code) {
-    // Results go to the floating notice: no layout shift under the top bar.
-    if (!code) {
-      ctx.notice("Paste a build code first.");
-      return;
-    }
-    if (!parseCode(code)) {
-      ctx.notice(`This is not a valid build code (it starts with ${PREFIX}:).`);
-      return;
-    }
     if (st.cls && !(await confirmModal("REPLACE THE BUILD?", "The imported code replaces the class, gear and perks you picked. Title and description stay.", "IMPORT"))) return;
     const errs = loadCode(code);
-    if (errs && errs.length) ctx.notice("Imported. Some parts do not match the current game and were dropped: " + errs.slice(0, 6).join("; ") + ".");
-    else ctx.notice("Imported.", true);
+    // The answer is at the button: it reads IMPORTED for a moment. Dropped parts are listed under the top bar.
+    mount(importMsg, errs && errs.length
+      ? h("div.msg.flash-msg", { role: "status", text: "Imported. Some parts do not match the current game and were dropped: " + errs.slice(0, 6).join("; ") + "." })
+      : null);
+    clearTimeout(importTimer);
+    importBtn.classList.add("copied");
+    setLabel(importBtn, "IMPORTED");
+    importTimer = setTimeout(() => {
+      importBtn.classList.remove("copied");
+      setLabel(importBtn, "IMPORT CODE");
+    }, 1600);
     st.view = { name: "overview" };
     draw();
   }
 
   titleInput.addEventListener("input", () => {
     st.title = titleInput.value;
+    titleMsg.clear();
     drawSide();
   });
   descInput.addEventListener("input", () => {
     st.description = descInput.value;
+    descMsg.clear();
     drawSide();
   });
 
@@ -322,8 +341,29 @@ function editor(ctx, editId, start, startNotes) {
     }
     publishBtn = button(editId ? "SAVE CHANGES" : "PUBLISH", { onclick: publish });
     return h("div.ls-actions",
+      actMsg,
       editId ? button("CANCEL", { kind: "sec", href: `/b/${editId}` }) : null,
       publishBtn);
+  }
+
+  // A refused publish is answered at the field it is about, which also gets the focus; anything else is
+  // answered above the button.
+  function refuse(content, field = "") {
+    titleMsg.clear();
+    descMsg.clear();
+    actMsg.clear();
+    if (field === "title") {
+      titleMsg.say(content);
+      flash(titleInput);
+      titleInput.focus();
+    } else if (field === "description") {
+      if (previewing) togglePreview();
+      descMsg.say(content);
+      flash(descInput);
+      descInput.focus();
+    } else {
+      actMsg.say(content);
+    }
   }
 
   function signInToPublish() {
@@ -339,32 +379,37 @@ function editor(ctx, editId, start, startNotes) {
     const v = current();
     const title = st.title.trim();
     if (!v.ok || !v.canonical) {
-      ctx.notice("The build is not complete: " + (v.errors || []).join("; "));
+      refuse("The build is not complete: " + (v.errors || []).join("; ") + ".");
       return;
     }
     if (!title) {
-      ctx.notice("Give your build a title.");
-      titleInput.focus();
+      refuse("Give your build a title.", "title");
       return;
     }
     st.busy = true;
     drawSide();
-    mount(publishMsg);
+    titleMsg.clear();
+    descMsg.clear();
+    actMsg.clear();
     const body = { title, description: st.description.trim(), code: v.canonical };
     try {
       const r = editId ? await api.put(`/api/builds/${editId}`, body) : await api.post("/api/builds", body);
       saved = snapshot();
       ctx.setGuard(null);
       clearDraft();
-      ctx.notice(editId ? "Changes saved." : "Build published. Share the link or copy the code.", true);
-      ctx.navigate(`/b/${r.id}`, { replace: !!editId });
+      ctx.navigate(`/b/${r.id}`, {
+        replace: !!editId,
+        note: { text: editId ? "Changes saved." : "Build published. Share the link or copy the code.", ok: true },
+      });
       window.scrollTo(0, 0);
     } catch (e) {
       st.busy = false;
       if (e.status === 401) {
-        mount(publishMsg, h("div.msg.err", h("span", { text: "Your session ended. " }), h("button.link-btn", { type: "button", text: "SIGN IN AGAIN", onclick: signInToPublish })));
+        refuse([h("span", { text: "Your session ended. " }), h("button.link-btn", { type: "button", text: "SIGN IN AGAIN", onclick: signInToPublish })]);
       } else {
-        ctx.notice(errorText(e));
+        // The server names the field first: "title has a word that is not allowed".
+        const field = e.status === 400 ? /^(title|description)\b/.exec(String(e.message || "")) : null;
+        refuse(errorText(e), field ? field[1] : "");
       }
       drawSide();
     }
@@ -394,11 +439,12 @@ function editor(ctx, editId, start, startNotes) {
   }
   const descBox = h("div.ls-desc",
     h("div.ls-deschead",
-      h("div.ls-deshead-l", h("span.ls-desctitle", { text: "Description" }), h("span.ls-deshint", { text: "Markdown supported" })),
+      h("div.ls-deshead-l", h("span.ls-desctitle", { text: "Description" }), h("span.ls-deshint", { text: "Markdown supported" }), descMsg),
       h("div.ls-deshead-r", descCount, previewBtn)),
     descInput, descPreview);
   function draw() {
     hideTip();
+    actMsg.clear(); // the build changed: the old answer is no longer about it
     mount(topIcon, st.cls ? classIcon(st.cls) : null);
     if (!st.cls) {
       mount(screen, classChooser());
@@ -416,12 +462,12 @@ function editor(ctx, editId, start, startNotes) {
   mount(ctx.app,
     h("div.ls-top",
       topIcon,
-      h("div.ls-titlebox", h("div.ls-titlehead", h("span.label", { text: editId ? "Edit build" : "New build" }), titleCount), titleInput),
+      h("div.ls-titlebox", h("div.ls-titlehead", h("span.label", { text: editId ? "Edit build" : "New build" }), titleMsg, titleCount), titleInput),
       h("div.ls-codebox", h("span.label", { text: "Build code" }), codeBox),
       h("div.ls-topbtns", copyBtn, importBtn)),
     h("div.ls-msgs",
       notes0.length ? h("div.msg", notes0.map((n) => h("div", { text: n }))) : null,
-      codeMsg, publishMsg),
+      codeMsg, importMsg),
     screen,
     descBox);
   draw();

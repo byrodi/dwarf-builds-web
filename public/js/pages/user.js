@@ -60,5 +60,8 @@ export async function userPage(ctx, steamIdArg) {
     list = h("div", cardGrid(data.builds, { showAuthor: false }),
       pager(data.page, data.hasMore, (n) => ctx.navigate(`${location.pathname}?page=${n}`).then(() => window.scrollTo(0, 0))));
   }
-  mount(ctx.app, head, list);
+  // The result of the action that led here ("Build deleted"), shown once.
+  const note = ctx.note ? h("div.msg.flash-msg" + (ctx.note.ok ? ".ok" : ".err"), { role: "status", text: ctx.note.text }) : null;
+  ctx.note = null;
+  mount(ctx.app, head, note, list);
 }
